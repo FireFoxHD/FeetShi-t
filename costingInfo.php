@@ -23,7 +23,7 @@
         $_SESSION['errProductCostPrice'] = "";
         $_SESSION['errProductSalePrice'] = "";
         $_SESSION['errProductStockQuantity'] = "";
-
+        echo"";
 
     }
 ?>
