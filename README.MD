@@ -3,7 +3,6 @@
 A website created for degenerates to buy shoes and other footwear. 
 
 
-
 ## Test credentials for DB
 ```
 email: admin@gmail.com
