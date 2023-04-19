@@ -71,7 +71,7 @@
                                 <td class="px-6 py-4">'.$row["unitCost"].'</td>
                                 <td class="px-6 py-4">'.$row["salePrice"].'</td>
                                 <td class="px-6 py-4">
-                                    <form action="./scripts/admin_script.php" method="POST"> 
+                                    <form action="./scripts/vendor_script.php" method="POST"> 
                                         <button name="editUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
                                             <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
                                         </button>
