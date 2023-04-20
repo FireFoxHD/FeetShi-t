@@ -1,18 +1,21 @@
 <?php
 
+    include './scripts/utils.php';
     session_start();
+    if(!isVendorAuth()) header("Location: ./login.php");
+
     if(
         !isset($_SESSION['productName']) || 
-        !isset($_SESSION['productCode']) || 
         !isset($_SESSION['productCategory']) || 
         !isset($_SESSION['productBrand']) ||
         !isset($_SESSION['productDesc']) ||
         !isset($_SESSION['productCostPrice']) ||
         !isset($_SESSION['productSalePrice']) ||
-        !isset($_SESSION['productStockQuantity'])
+        !isset($_SESSION['productStockQuantity'])||
+        !isset($_SESSION['imgPath'])
         ){ 
-            header("Location: productinfo.php");
-            exit;
+            header("Location: costInfo.php");
+            exit();
     }
 ?>
 
@@ -30,9 +33,7 @@
     <title>Feetsh*t</title>
 </head>
 <body>
-    <?php require './components/header_admin.php'; ?>
-
-    
+    <?php require './components/header_vendor.php'; ?>
 
     <div class="flex flex-col items-center justify-center">
         <div class="flex flex-col items-center justify-center mt-12">
@@ -42,7 +43,6 @@
         <div class="w-2/3">
             <div class="rounded shadow-md flex justify-around items-center my-2 p-6 bg-sky-800">
                 <p class="font-bold text-xl text-slate-200"><?php echo $_SESSION['productName']?></p>
-                <p class="font-semibold text-white"><?php echo $_SESSION['productCode']?></p>
             </div>
 
             <div class="flex justify-around">
@@ -54,7 +54,8 @@
                         <p>Category: <?php echo $_SESSION['productCategory']?></p>
                         <p>Brand: <?php echo $_SESSION['productBrand']?></p>
                         <p>Quantity: <?php echo $_SESSION['productStockQuantity']?></p>
-                    </div>
+                        <p>File: <?php echo $_SESSION['imgPath']?></p>
+                    </div> 
 
                     <div class="my-4 p-2">   
                         <p>Sales Price: <?php echo $_SESSION['productCostPrice']?></p>
@@ -65,8 +66,8 @@
             
         </div>
 
-        <form method="POST" action="./scripts/registerProduct_script.php">
-            <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-64 rounded my-4" type="submit" name="saveFile" value="Save Product to file"/>
+        <form method="POST" action="./scripts/saveProduct_script.php">
+            <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-64 rounded my-4" type="submit" name="saveProduct" value="Save Product"/>
         </form>
     
     </div>

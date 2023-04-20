@@ -1,10 +1,13 @@
 <?php
 
-	session_start();
+	
+    include './scripts/utils.php';
+    session_start();
+    if(!isVendorAuth()) header("Location: ./login.php");
+
 	if(isset($_SESSION['errors'])){
         //to persist values after form submission in case use made an error
         $productName = $_SESSION['productName'];
-        $productCode =  $_SESSION['productCode'];
         $productCategory = $_SESSION['productCategory'];
         $productBrand = $_SESSION['productBrand'];
         $productDesc = $_SESSION['productDesc'];
@@ -12,7 +15,6 @@
 	}else{
         // Field values
         $_SESSION['productName'] = "";
-        $_SESSION['productCode'] = "";
         $_SESSION['productDesc'] = "";
         $_SESSION['productCategory'] = "";
         $_SESSION['productBrand'] = "";
@@ -24,10 +26,10 @@
 
         //Error field values
         $_SESSION['errProductName'] = "";
-        $_SESSION['errProductCode'] = "";
         $_SESSION['errProductDesc'] = "";
         $_SESSION['errProductCategory'] = "";
         $_SESSION['errProductBrand'] = "";
+        $_SESSION['errProductImg'] = "";
 
     }
 ?>
@@ -47,7 +49,7 @@
 </head>
 
 <body>
-    <?php require './components/header_admin.php'; ?>
+    <?php require './components/header_vendor.php'; ?>
     <div class="flex flex-col items-center justify-center">
         <div class="flex flex-col items-center justify-center mt-12">
             <h1 class="font-bold text-gray-700 text-2xl p-4">Add Product</h1>
@@ -55,16 +57,10 @@
         </div>
 
         <div class="flex items-center justify-center">
-            <form class="flex flex-col items-center justify-center my-6 w-full" action="./scripts/product_script.php" method="POST">
+            <form class="flex flex-col items-center justify-center my-6 w-full" action="./scripts/product_script.php" method="POST" enctype="multipart/form-data">
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">Product Name</label><?php echo $_SESSION['errProductName']; ?>
                     <input name="productName" type="text" value="<?php echo $productName?>" class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm  ocus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150" autocomplete="off">
-                    
-                </div>
-    
-                <div class="m-2 w-full">
-                    <label class="text-blueGray-600 font-bold mb-2">Product Code</label><?php echo $_SESSION['errProductCode']; ?>
-                    <input name="productCode" type="text" value="<?php echo $productCode?>" class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150" autocomplete="off">
                     
                 </div>
     
@@ -80,8 +76,14 @@
                 </div>
     
                 <div class="m-2 w-full">
-                    <label class="text-blueGray-600 font-bold mb-2">Description</label> <?php echo $_SESSION['errProductDesc']; ?>
+                     <label class="text-blueGray-600 font-bold mb-2">Description</label> <!-- Sanitize in backend -->
                     <input name="productDescription" type="text" value="<?php echo $productDesc?>"  class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150" autocomplete="off">
+                
+                </div>
+
+                <div class="m-2 w-full">
+                    <label class="text-blueGray-600 font-bold mb-2">Upload image</label> <?php echo $_SESSION['errProductImg']; ?>
+                    <input name="productImg" type="file" class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150">
                 
                 </div>
     

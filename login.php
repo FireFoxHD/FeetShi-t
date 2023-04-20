@@ -1,6 +1,5 @@
 <?php
-
-	session_start();
+    session_start();
 	if(isset($_SESSION['errors'])){
         //to persist values after form submission in case use made an error
         $email = $_SESSION['email'];
@@ -8,6 +7,16 @@
     
 		unset($_SESSION['errors']);		
 	}else{
+
+        if(isset($_SESSION['userId'])){
+            include './scripts/utils.php';
+            if(setInactive($_SESSION['userId'])){
+                session_destroy();
+            }
+              
+        }
+    
+        if(session_status() === PHP_SESSION_NONE) session_start();
         // Field values
         $_SESSION['email'] = "";
         $_SESSION['password'] = "";

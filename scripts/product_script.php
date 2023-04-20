@@ -7,7 +7,6 @@
     if (isset($_POST["submit"])) {
         //validate and store form values in session
         $productName = trim($_POST["productName"]);
-        $productCode = trim($_POST["productCode"]);
         $productCategory = trim($_POST["productCategory"]);
         $productBrand = trim($_POST["productBrand"]);
         $productDesc = trim($_POST["productDescription"]);
@@ -22,13 +21,6 @@
             $_SESSION['errProductName'] = "";
         }
 
-        if(empty($productCode)){
-            createError($productCode, 'errProductCode', 'Cannot be empty!');
-        }else{
-            $_SESSION['productCode'] = $productCode;
-            $_SESSION['errProductCode'] = "";
-        }
-
         if(empty($productBrand)){
             createError($productBrand, 'errProductBrand', 'Cannot be empty!');
         }else{
@@ -37,10 +29,9 @@
         }
 
         if(empty($productDesc)){
-            createError($productDesc, 'errProductDesc', 'Cannot be empty!');
+            $_SESSION['productDesc'] = "NO DESCRIPTION";
         }else{
-            $_SESSION['productDesc'] = $productDesc;
-            $_SESSION['errProductDesc'] = "";
+            $_SESSION['productDesc'] = "$productDesc";
         }
 
         if(empty($productCategory)){
@@ -54,12 +45,15 @@
             }
         }
 
+        $_SESSION['imgPath'] = "";
+        include 'upload.php';
+
         //redirect to cost page if no errors
         if ($_SESSION['errors']){
-            header("Location: ../productinfo.php");
+            header("Location: ../addProduct.php");
         }else{
             header("Location: ../costingInfo.php");
         }
-        
+            
     }
 ?>

@@ -37,7 +37,7 @@
         if ($_SESSION['errors']){
             header("Location: ../costingInfo.php");
         }else{
-            header("Location: ../registerProduct.php");
+            header("Location: ../confirmProduct.php");
         }
         
     }

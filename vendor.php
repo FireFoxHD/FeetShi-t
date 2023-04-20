@@ -1,8 +1,8 @@
 <?php
     include './scripts/utils.php';
     session_start();
-    if(!isVendorAuth()) header("Location: ./login.php");
-    
+    if(!isVendorAuth()) header("Location: ./login.php"); 
+    if(isset($_SESSION['errors'])) unset($_SESSION['errors']);	
 ?>
 
 

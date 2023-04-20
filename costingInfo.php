@@ -1,15 +1,21 @@
 <?php
 
-	session_start();
-    if(
-        !isset($_SESSION['productName']) || 
-        !isset($_SESSION['productCode']) || 
-        !isset($_SESSION['productCategory']) || 
-        !isset($_SESSION['productBrand']) ||
-        !isset($_SESSION['productDesc'])){
-            header("Location: ../productinfo.php");
-            exit;
-        }
+    include './scripts/utils.php';
+    session_start();
+    if(!isVendorAuth()) header("Location: ./login.php");
+
+    echo 'PATH: '. $_SESSION['imgPath'];
+    echo 'PATH: '. $_SESSION['productImagePath'];
+    
+    // if(
+    //     !isset($_SESSION['productName']) || 
+    //     !isset($_SESSION['productCategory']) || 
+    //     !isset($_SESSION['productBrand']) ||
+    //     !isset($_SESSION['productDesc'])||
+    //     !isset($_SESSION['imgPath'])){
+    //         header("Location: ../addProduct.php");
+    //         exit();
+    // }
 	
 	if(isset($_SESSION['errors'])){
 		unset($_SESSION['errors']);		
@@ -23,7 +29,7 @@
         $_SESSION['errProductCostPrice'] = "";
         $_SESSION['errProductSalePrice'] = "";
         $_SESSION['errProductStockQuantity'] = "";
-        echo"";
+
 
     }
 ?>
@@ -43,7 +49,7 @@
 </head>
 
 <body>
-    <?php require './components/header_admin.php'; ?>
+    <?php require './components/header_vendor.php'; ?>
     <div class="flex flex-col items-center justify-center">
     
         <div class="flex flex-col items-center justify-center mt-12">
@@ -52,12 +58,12 @@
         </div>
 
         <div class="flex items-center justify-center">
-            <form class="flex flex-col items-center justify-center my-6" action="./scripts/cost_script.php" method="POST">
+            <form class="flex flex-col items-center justify-center my-6" action="./scripts/cost_script.php" method="POST" enctype="multipart/form-data">
 
                 <div class="m-2 w-full">
                    
                     <div class="flex">
-                        <label class="text-blueGray-600 font-bold mb-2" >Product Cost Price</label>
+                        <label class="text-blueGray-600 font-bold mb-2">Product Unit Cost</label>
                         <?php echo $_SESSION['errProductCostPrice']; ?>
                     </div>
                     <input name="productCostPrice" type="text"  class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm  ocus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150" autocomplete="off">

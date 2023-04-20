@@ -1,5 +1,5 @@
 <?php
-
+    include './scripts/utils.php';
 	session_start();
     if(!isAdminAuth()) header("Location: ./login.php");
     
@@ -53,7 +53,7 @@
 </head>
 
 <body>
-    <?php require './components/header.php'; ?>
+    <?php require './components/header_admin.php'; ?>
     <div class="flex flex-col items-center justify-center">
         <div class="flex flex-col items-center justify-center mt-12">
             <h1 class="font-bold text-gray-700 text-2xl p-4">Create Account</h1>
