@@ -10,7 +10,8 @@
                 </button>
                 <!-- ./ Menu Trigger -->
 
-                <a href="./index.php" class="font-bold text-gray-700 text-2xl">Feetsh*t.</a>
+                <!-- TODO: navigation back to index doesnt work from product page -->
+                <a href="index.php" class="font-bold text-gray-700 text-2xl">Feetsh*t.</a>
 
                 <nav class="hidden md:flex space-x-3 flex-1 lg:ml-8 mx-4">
                     <ul class="hidden md:flex space-x-3 flex-1 lg:ml-8">

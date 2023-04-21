@@ -4,21 +4,27 @@
     session_start();
     if(!isVendorAuth()) header("Location: ./login.php");
 
-    echo 'PATH: '. $_SESSION['imgPath'];
-    echo 'PATH: '. $_SESSION['productImagePath'];
-    
-    // if(
-    //     !isset($_SESSION['productName']) || 
-    //     !isset($_SESSION['productCategory']) || 
-    //     !isset($_SESSION['productBrand']) ||
-    //     !isset($_SESSION['productDesc'])||
-    //     !isset($_SESSION['imgPath'])){
-    //         header("Location: ../addProduct.php");
-    //         exit();
-    // }
+    if(!isset(
+            $_SESSION['productName'],
+            $_SESSION['productCategory'],
+            $_SESSION['productBrand'],
+            $_SESSION['productDesc']))
+    {
+            header("Location: ../addProduct.php");
+            exit();
+    }
 	
 	if(isset($_SESSION['errors'])){
-		unset($_SESSION['errors']);		
+		unset($_SESSION['errors']);	
+        if(!isset(
+            $_SESSION['errProductCostPrice'],
+            $_SESSION['errProductSalePrice'],
+            $_SESSION['errProductStockQuantity']))
+        {
+            $_SESSION['errProductCostPrice'] = "";
+            $_SESSION['errProductSalePrice'] = "";
+            $_SESSION['errProductStockQuantity'] = "";
+        }
 	}else{
         // Field values
         $_SESSION['productCostPrice'] = "";
@@ -58,7 +64,7 @@
         </div>
 
         <div class="flex items-center justify-center">
-            <form class="flex flex-col items-center justify-center my-6" action="./scripts/cost_script.php" method="POST" enctype="multipart/form-data">
+            <form class="flex flex-col items-center justify-center my-6" action="./scripts/product_script.php" method="POST" enctype="multipart/form-data">
 
                 <div class="m-2 w-full">
                    
@@ -88,7 +94,7 @@
                     
                 </div>
 
-                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-32 rounded my-4" id="saveForm" type="submit" name="submit" value="Submit" />
+                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-32 rounded my-4" id="saveForm" type="submit" name="costSubmit" value="Submit" />
 
             </form>
         </div>

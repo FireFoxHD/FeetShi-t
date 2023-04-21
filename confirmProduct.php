@@ -5,18 +5,21 @@
     if(!isVendorAuth()) header("Location: ./login.php");
 
     if(
-        !isset($_SESSION['productName']) || 
-        !isset($_SESSION['productCategory']) || 
-        !isset($_SESSION['productBrand']) ||
-        !isset($_SESSION['productDesc']) ||
-        !isset($_SESSION['productCostPrice']) ||
-        !isset($_SESSION['productSalePrice']) ||
-        !isset($_SESSION['productStockQuantity'])||
-        !isset($_SESSION['imgPath'])
-        ){ 
+        !isset(
+            $_SESSION['productName'],
+            $_SESSION['productCategory'],
+            $_SESSION['productBrand'],
+            $_SESSION['productDesc'],
+            $_SESSION['productCostPrice'],
+            $_SESSION['productSalePrice'],
+            $_SESSION['productStockQuantity']
+        )){ 
             header("Location: costInfo.php");
             exit();
     }
+
+    if(!isset($_SESSION['uploadStatus'])) $_SESSION['uploadStatus'] = "";
+
 ?>
 
 
@@ -39,34 +42,38 @@
         <div class="flex flex-col items-center justify-center mt-12">
             <h1 class="font-bold text-gray-700 text-2xl p-4">Register Product</h1>
         </div>
-
-        <div class="w-2/3">
-            <div class="rounded shadow-md flex justify-around items-center my-2 p-6 bg-sky-800">
-                <p class="font-bold text-xl text-slate-200"><?php echo $_SESSION['productName']?></p>
-            </div>
-
-            <div class="flex justify-around">
-                <div class="my-2 p-2 w-80">
-                    <?php echo $_SESSION['productDesc']?>
+        <form action="./scripts/product_script.php" method="POST" enctype="multipart/form-data">
+            <div class="w-2/3">
+                <div class="rounded shadow-md flex justify-around items-center my-2 p-6 bg-sky-800">
+                    <p class="font-bold text-xl text-slate-200"><?php echo $_SESSION['productName']?></p>
                 </div>
-                <div class="flex flex-col my-2 items-start">
-                    <div class="p-2">   
-                        <p>Category: <?php echo $_SESSION['productCategory']?></p>
-                        <p>Brand: <?php echo $_SESSION['productBrand']?></p>
-                        <p>Quantity: <?php echo $_SESSION['productStockQuantity']?></p>
-                        <p>File: <?php echo $_SESSION['imgPath']?></p>
-                    </div> 
 
-                    <div class="my-4 p-2">   
-                        <p>Sales Price: <?php echo $_SESSION['productCostPrice']?></p>
-                        <p>Cost Price: <?php echo $_SESSION['productSalePrice']?></p>   
+                <div class="flex justify-around">
+                    <div class="m-2 w-full">
+                        <label class="text-blueGray-600 font-bold mb-2">Upload image</label> <?php echo $_SESSION['errProductImg']; ?>
+                        <input name="productImg" type="file" class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150">
+                    
+                    </div>
+                    <div class="flex flex-col my-2 items-start">
+                        <div class="p-2">   
+                            <p>Category: <?php echo $_SESSION['productCategory']?></p>
+                            <p>Brand: <?php echo $_SESSION['productBrand']?></p>
+                            <p>Quantity: <?php echo $_SESSION['productStockQuantity']?></p>          
+                        </div> 
+
+                        <div class="my-4 p-2">   
+                            <p>Sales Price: <?php echo $_SESSION['productCostPrice']?></p>
+                            <p>Cost Price: <?php echo $_SESSION['productSalePrice']?></p>   
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-        </div>
 
-        <form method="POST" action="./scripts/saveProduct_script.php">
+                <p><?php echo $_SESSION['uploadStatus']?></p>
+                
+            </div>
+
+        
+            
             <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-64 rounded my-4" type="submit" name="saveProduct" value="Save Product"/>
         </form>
     

@@ -3,15 +3,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 md:py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-between md:justify-start">
-                    <a href="./admin.php" class="font-bold text-gray-700 text-2xl">Feetsh*t.</a>
+                    <a href="admin.php" class="font-bold text-gray-700 text-2xl">Feetsh*t.</a>
 
                     <nav class="hidden md:flex space-x-3 flex-1 lg:ml-8 mx-4">
                         <ul class="hidden md:flex space-x-3 flex-1 lg:ml-8">
                             <li>
-                                <a href="./admin.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">View Users</a>
+                                <a href="admin.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">View Users</a>
                             </li>
                             <li>
-                                <a href="./admin_registerUser.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Add User</a>
+                                <a href="admin_registerUser.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Add User</a>
                             </li>
                            
                         </ul>

@@ -1,6 +1,4 @@
 <?php
-
-	
     include './scripts/utils.php';
     session_start();
     if(!isVendorAuth()) header("Location: ./login.php");
@@ -10,7 +8,8 @@
         $productName = $_SESSION['productName'];
         $productCategory = $_SESSION['productCategory'];
         $productBrand = $_SESSION['productBrand'];
-        $productDesc = $_SESSION['productDesc'];
+        $productDesc = "";
+        
 		unset($_SESSION['errors']);		
 	}else{
         // Field values
@@ -80,14 +79,8 @@
                     <input name="productDescription" type="text" value="<?php echo $productDesc?>"  class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150" autocomplete="off">
                 
                 </div>
-
-                <div class="m-2 w-full">
-                    <label class="text-blueGray-600 font-bold mb-2">Upload image</label> <?php echo $_SESSION['errProductImg']; ?>
-                    <input name="productImg" type="file" class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150">
-                
-                </div>
     
-                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-32 rounded my-4" id="saveForm" type="submit" name="submit" value="Submit" />
+                <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-32 rounded my-4" id="saveForm" type="submit" name="productSubmit" value="Submit" />
     
             </form>
         </div>

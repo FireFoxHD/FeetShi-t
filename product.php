@@ -13,7 +13,8 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <?php require '../components/header.php'; ?>
+    <?php require './components/header.php'; ?>
+    
     <div class="antialiased">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             <div class="flex flex-col md:flex-row -mx-4">

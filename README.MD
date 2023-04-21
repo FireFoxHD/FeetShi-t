@@ -14,10 +14,8 @@ password: 12345678A!
 
 ### TODO:
 - Create/fix landing page for guests (index.php)
-- Allow vendors to add products (including image upload)
 - Allow edit and delete of users (by admin)
 - Allow edit and delete of products (by vendor)
-- Add navigation to header_vendor.php
-- Fix add_users navigation item in header_admin.php
 - sanitize ALL inputs
-- - imgPath session variable doesnt work (testing in costinfo.php)
+- populate product page with data for specific item
+- fix header navigation from product page
