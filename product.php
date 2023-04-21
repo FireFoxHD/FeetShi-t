@@ -1,3 +1,32 @@
+<?php
+
+    $prodId = "";
+    $productName = "";
+    $productCategory = "";
+    $productBrand = "";
+    $productDesc = "";
+    $productSalePrice = "";
+    $imgPath = "";
+
+    if(isset($_GET['id'])){
+        include './scripts/dbConnection.php';
+
+        $prodId = $_GET['id'];
+        $sql = "SELECT * FROM products WHERE id = '$prodId'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $productName = $row['name'];
+                $productCategory = $row['category'];
+                $productBrand = $row['brand'];
+                $productDesc = $row['description'];
+                $productSalePrice = $row['salePrice'];
+                $imgPath = $row['imgPath'];
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,20 +43,20 @@
 
 <body class="flex flex-col min-h-screen">
     <?php require './components/header.php'; ?>
-    
+
     <div class="antialiased">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             <div class="flex flex-col md:flex-row -mx-4">
-                <img class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4" src="./assets/images/sneakers/whitesneakers.jpg">
+                <img class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4" src="<?php echo $imgPath ?>">
                 <div class="md:flex-1 px-4">
-                    <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">Greats The Royale</h2>
-                    <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline">ABC Company</a></p>
+                    <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"><?php echo $productName ?></h2>
+                    <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline"><?php echo $productName ?></a></p>
 
                     <div class="flex items-center space-x-4 my-4">
                         <div>
                             <div class="rounded-lg bg-gray-100 flex py-2 px-3">
                                 <span class="text-indigo-400 mr-1 mt-1">$</span>
-                                <span class="font-bold text-indigo-600 text-3xl">25</span>
+                                <span class="font-bold text-indigo-600 text-3xl"><?php echo $productSalePrice ?></span>
                             </div>
                         </div>
                         <div class="flex-1">
@@ -36,7 +65,9 @@
                         </div>
                     </div>
 
-                    <p class="text-gray-500">This pair’s refined lines elevate any wardrobe choice. And these shoes are equally fitting for a dinner date or a day at the office. The full-grain leather is long-lasting and has a lovely, subtle shine, but they’re hard to break in.</p>
+                    <p class="text-gray-500">
+                        <?php echo $productDesc ?>
+                    </p>
 
                     <div class="flex ml-6 items-center m-4">
                         <span class="mr-3">Size</span>

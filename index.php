@@ -32,8 +32,6 @@ if (isset($_SESSION['userId'])) {
 		<h1 class="font-bold text-gray-700 text-6xl text-center my-4">Welcome to Feetsh*t</h1>
 	</div>
 
-    <p class="font-bold text-gray-700 text-3xl mx-12 my-2">Sneakers</p>
-
 	<div class="container grid grid-cols-4 gap-2 mx-auto">
 		<?php
 			$sql = "SELECT id, imgPath FROM products";
@@ -42,7 +40,7 @@ if (isset($_SESSION['userId'])) {
 				while ($row = $result->fetch_assoc()) {
 					echo '
 						<div class="aspect-square overflow-hidden">
-							<a href="product.php/?id='.$row["id"].'">
+							<a href="product.php?id='.$row["id"].'">
 								<img  
 									class="h-full w-full object-cover transition-all duration-300 hover:scale-125"
 									src='.$row["imgPath"].' 
@@ -53,7 +51,7 @@ if (isset($_SESSION['userId'])) {
 				}
 			}
 		?>
-      </div>
+    </div>
 </body>
 
 </html>
