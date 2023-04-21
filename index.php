@@ -34,6 +34,7 @@ if (isset($_SESSION['userId'])) {
 
 
 	<p class="font-bold text-gray-700 text-3xl mx-12 my-2">Boots</p>
+    <p class="font-bold text-gray-700 text-3xl mx-12 my-2">Sneakers</p>
 
 	<div class="container grid grid-cols-4 gap-2 mx-auto">
 		<?php
@@ -53,12 +54,12 @@ if (isset($_SESSION['userId'])) {
 					';
 				}
 			}
+			?>
+      </div>
 
-		?>
+  
 
-	</div>
-
-
+  
 
 
 
