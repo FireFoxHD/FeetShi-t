@@ -32,8 +32,6 @@ if (isset($_SESSION['userId'])) {
 		<h1 class="font-bold text-gray-700 text-6xl text-center my-4">Welcome to Feetsh*t</h1>
 	</div>
 
-
-	<p class="font-bold text-gray-700 text-3xl mx-12 my-2">Boots</p>
     <p class="font-bold text-gray-700 text-3xl mx-12 my-2">Sneakers</p>
 
 	<div class="container grid grid-cols-4 gap-2 mx-auto">
@@ -54,15 +52,8 @@ if (isset($_SESSION['userId'])) {
 					';
 				}
 			}
-			?>
+		?>
       </div>
-
-  
-
-  
-
-
-
 </body>
 
 </html>
