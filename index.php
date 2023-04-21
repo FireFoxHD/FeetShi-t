@@ -30,7 +30,7 @@
     </div>
 
 
-    <p class="font-bold text-gray-700 text-3xl mx-12 my-2">Boots</p>
+    <p class="font-bold text-gray-700 text-3xl mx-12 my-2">Sneakers</p>
 
     <div class="container grid grid-cols-4 gap-2 mx-auto">
 
@@ -39,17 +39,61 @@
       </div>
 
         <div class="aspect-square overflow-hidden">
-        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/sneakers/whitesneakers.jpg" alt="" />
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/sneakers/nikebobmarley.png" alt="" />
       </div> 
 
       <div class="aspect-square overflow-hidden">
-        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/sneakers/whitesneakers.jpg" alt="" />
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/sneakers/rednikeairmax.png" alt="" />
       </div> 
       
       <div class="aspect-square overflow-hidden">
-        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/sneakers/whitesneakers.jpg" alt="" />
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/sneakers/whitenikeair.png" alt="" />
       </div>
     </div>
+
+    <p class="font-bold text-gray-700 text-3xl mx-12 my-2">Boots</p>
+
+    <div class="container grid grid-cols-4 gap-2 mx-auto">
+
+      <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/boots/blackfemaleboot.png" alt="" />
+      </div>
+
+        <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/boots/blackfemaleboot2.png" alt="" />
+      </div> 
+
+      <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/boots/blackmaleboot.png" alt="" />
+      </div> 
+      
+      <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/boots/redfemaleboot.png" alt="" />
+      </div>
+    </div>
+
+    <p class="font-bold text-gray-700 text-3xl mx-12 my-2">Loafers</p>
+
+    <div class="container grid grid-cols-4 gap-2 mx-auto">
+
+      <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/loafers/brownmaleloafers.png" alt="" />
+      </div>
+
+        <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/loafers/blacksuedemaleloafers.png" alt="" />
+      </div> 
+
+      <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/loafers/blacksuedefemaleloafers.png" alt="" />
+      </div> 
+      
+      <div class="aspect-square overflow-hidden">
+        <img class="h-full w-full object-cover transition-all duration-300 hover:scale-125" src="./assets/images/loafers/brownsuedefemaleloafers.png" alt="" />
+      </div>
+    </div>
+
+    
 
   
 
