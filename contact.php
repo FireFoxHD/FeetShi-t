@@ -20,9 +20,11 @@
 	</div>
 
 	<div class="flex flex-col items-center">
-        <p class="p-2 text-lg text-gray-700">Phone: 1(876)771-3956 </p>
-        <p class="p-2 text-lg text-gray-700">Email: kpowell@gmail.com</p>
-        <p class="p-2 text-lg text-gray-700">Address: 5 Fairmont Dr, Kingston, Jamaica</p>
+        <p class="p-2 mb-4 text-lg text-gray-700 text-center">E-commerce websited created as a final project for Web systems and design implementations (WSDI)
+            <br/> using TailwindCSS and PHP.</p>
+        <p class="font-bold text-gray-500">Phone: 1(876)771-3957</p>
+        <p class="font-bold text-gray-500">Email: khamalipowell@gmail.com</p>
+        <p class="font-bold text-gray-500">Address: 5 Fairmont Dr, Kingston, Jamaica</p>
 	</div>
     
 	<?php require './components/footer.php'; ?>

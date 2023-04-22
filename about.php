@@ -21,6 +21,7 @@
 
 	<div class="flex flex-col items-center">
         <p class="p-2 text-lg text-gray-700">A website created for degenerates to buy shoes and other footwear.</p>
+        <p class="p-2 text-sm font-bold text-gray-400">Created by: Khamali Powell 1901908</p>
 	</div>
 	<?php require './components/footer.php'; ?>
 </body>
