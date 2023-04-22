@@ -11,9 +11,23 @@
     }
 
     if (isset($_POST["deleteUserBtn"])){
-        $_SESSION['userId'] = $_POST['deleteUser'];
+        include 'dbConnection.php';
+
+        $userId = $_POST['deleteUserBtn'];
+        $sql = "DELETE FROM users WHERE id = '$userId'";
+
+        if ($conn->query($sql) === TRUE) {
+            $_SESSION['actionMsg'] = 'User Deleted';
+        }else{
+            $_SESSION['actionMsg'] = 'Error deleting record';
+        }
+
+        if ($conn)$conn->close();
         header("Location: ../admin.php");
-    }
+    } 
+
+        
+    
     
     if (isset($_POST["editUserSubmit"])){
         //from edit user page

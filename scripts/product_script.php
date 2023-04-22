@@ -9,7 +9,6 @@
         //validate and store form values in session
         $productName = trim($_POST["productName"]);
         $productCategory = trim($_POST["productCategory"]);
-        $productBrand = trim($_POST["productBrand"]);
         $productDesc = trim($_POST["productDescription"]);
 
         //check empty
@@ -20,13 +19,6 @@
         }else{
             $_SESSION['productName'] = $productName;
             $_SESSION['errProductName'] = "";
-        }
-
-        if(empty($productBrand)){
-            createError($productBrand, 'errProductBrand', 'Cannot be empty!');
-        }else{
-            $_SESSION['productBrand'] = $productBrand;
-            $_SESSION['errProductBrand'] = "";
         }
 
         if(empty($productDesc)){
@@ -45,22 +37,7 @@
                 createError($productCategory, 'errProductCategory', 'Can only contain letters!');
             }
         }
-        
-       
 
-        //redirect to cost page if no errors
-        if ($_SESSION['errors']){
-            header("Location: ../addProduct.php");
-            exit();
-        }else{
-            header("Location: ../costingInfo.php");
-            exit();
-        }
-            
-    }
-
-    if (isset($_POST["costSubmit"])) {
-        //validate and store form values in session
         $productCostPrice = (is_numeric($_POST['productCostPrice']) ? (float)$_POST['productCostPrice'] : trim($_POST["productCostPrice"]));
         $productSalePrice = (is_numeric($_POST['productSalePrice']) ? (float)$_POST['productSalePrice'] : trim($_POST["productSalePrice"]));
         $productStockQuantity = (is_numeric($_POST['productStockQuantity']) ? (int)$_POST['productStockQuantity'] : trim($_POST["productStockQuantity"]));
@@ -87,16 +64,20 @@
         }else{ 
             createError($productStockQuantity, 'errProductStockQuantity', 'Must be an integer');
         }
+        
+       
+
         //redirect to cost page if no errors
         if ($_SESSION['errors']){
-            header("Location: ../costingInfo.php");
+            header("Location: ../addProduct.php");
             exit();
         }else{
             header("Location: ../confirmProduct.php");
             exit();
         }
-        
+            
     }
+
 
     if (isset($_POST['saveProduct'])){ 
         $target_file = "../productImages/".basename($_FILES["productImg"]["name"]);
@@ -136,7 +117,6 @@
         $user = $_SESSION['userId'];
         $productName = $_SESSION['productName'];
         $productCategory = $_SESSION['productCategory'];
-        $productBrand = $_SESSION['productBrand'];
         $productDesc = $_SESSION['productDesc'];
 
         $productCostPrice = $_SESSION['productCostPrice'];
@@ -148,17 +128,10 @@
         
             if (move_uploaded_file($_FILES["productImg"]["tmp_name"], $target_file)) {
                 $_SESSION['uploadStatus'] = "";
-                $insert_query = "INSERT INTO products (id, vendorId, name, description, category, brand, unitCost, salePrice, quantity, imgPath)
-                VALUES ('$id', '$user','$productName','$productDesc','$productCategory', '$productBrand' , '$productCostPrice', '$productSalePrice', '$productStockQuantity', '$imgPath')";
-           
-                
-
-                $result = $conn->query($insert_query);
-                
-                echo $insert_query;
-                echo $result;
-                        
-                if ($result === TRUE){
+                $insert_query = "INSERT INTO products (id, vendorId, name, description, category, unitCost, salePrice, quantity, imgPath)
+                VALUES ('$id', '$user','$productName','$productDesc','$productCategory', '$productCostPrice', '$productSalePrice', '$productStockQuantity', '$imgPath')";
+                         
+                if ($conn->query($insert_query)=== TRUE){
                     $_SESSION['uploadStatus'] = "<span style='color:green;text-align:left;'>Data Inserted Successfully!</span> <br>";
                 }else{
                     if (file_exists($target_file)) unlink($target_file);

@@ -69,7 +69,7 @@
         
             if ($password_1 == $password_2){
            
-                if (preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password_1)){
+                if (preg_match("/^(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[a-zA-Z]).*$/",$password_1)){
                     $_SESSION['password_1'] = $password_1;
                     $_SESSION['errPassword'] = ""; 
                 }else{
@@ -95,15 +95,15 @@
         
         
         if ($_SESSION['errors']){
-            header("Location: ../admin.php");
+            header("Location: ../admin_registerUser.php");
         }else{
             include 'dbConnection.php';
             //hash the password
             $hashed_pwd = hash('sha256', $password_1);
             $id = uniqid();
-            $insert_query = "INSERT INTO users (id, firstname, lastname, email, hashed_pwd,  dob, phone, accType)
-                VALUES ( '$id', '$firstname','$lastname','$email','$hashed_pwd','', '$phone' , '$accType', 'inactive')";
-            echo $insert_query."<br>";
+            $insert_query = "INSERT INTO users (id, firstname, lastname, email, hashed_pwd, phone, accType, status)
+                VALUES ( '$id', '$firstname','$lastname','$email','$hashed_pwd','$phone', '$accType', 'inactive')";
+           
             $result = $conn->query($insert_query);
             
             if ($result === TRUE){
@@ -115,5 +115,6 @@
             //close connection
             if ($conn)$conn->close();
             session_destroy();
+            header("Location: ../admin.php");
         }
 }

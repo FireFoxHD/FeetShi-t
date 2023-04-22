@@ -8,13 +8,12 @@
         !isset(
             $_SESSION['productName'],
             $_SESSION['productCategory'],
-            $_SESSION['productBrand'],
             $_SESSION['productDesc'],
             $_SESSION['productCostPrice'],
             $_SESSION['productSalePrice'],
             $_SESSION['productStockQuantity']
         )){ 
-            header("Location: costInfo.php");
+            header("Location: addProduct.php");
             exit();
     }
 
@@ -57,7 +56,6 @@
                     <div class="flex flex-col my-2 items-start">
                         <div class="p-2">   
                             <p>Category: <?php echo $_SESSION['productCategory']?></p>
-                            <p>Brand: <?php echo $_SESSION['productBrand']?></p>
                             <p>Quantity: <?php echo $_SESSION['productStockQuantity']?></p>          
                         </div> 
 

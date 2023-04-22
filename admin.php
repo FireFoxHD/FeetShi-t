@@ -7,6 +7,7 @@
     // var_export(getAccType($_SESSION['userId']) == "admin");
     // var_export(isAdminAuth());
     if(!isAdminAuth()) header("Location: ./login.php");
+    if(!isset($_SESSION['actionMsg'])) $_SESSION['actionMsg'] = "";
     
 ?>
 
@@ -46,6 +47,8 @@
                
     </div>
 
+    <p class="text-center text-md font-bold"><?php echo $_SESSION['actionMsg']?></p>
+
     <div class="flex flex-col items-center justify-center w-full">
         
         <table class="text-center text-sm font-light w-2/3">
@@ -62,7 +65,9 @@
                 <?php
                     $sql = "SELECT * FROM users";
                     $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
+
+                    if ($result!== false && $result->num_rows > 0) {
+                    
                         while($row = $result->fetch_assoc()) {
 
                         if ($row["status"] == 'inactive')
@@ -95,6 +100,11 @@
                                 
                             ';
                         }
+                    }else{
+                        echo '
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
+                            <td colSpan="5" class="px-6 py-4 text-center">No Results</td>
+                        </tr>';
                     }
                     
                     if ($conn) $conn-> close();

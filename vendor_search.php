@@ -47,7 +47,6 @@
                 <tr>
                     <th scope="col" class="px-6 py-4">Name</th>
                     <th scope="col" class="px-6 py-4">Category</th>
-                    <th scope="col" class="px-6 py-4">Brand</th>
                     <th scope="col" class="px-6 py-4">Stock</th>
                     <th scope="col" class="px-6 py-4">Unit Cost</th>
                     <th scope="col" class="px-6 py-4">Sale Price</th>
@@ -60,7 +59,6 @@
                     $search = mysqli_real_escape_string($conn, $_POST['search']);
                     $sql = "SELECT * FROM products
                             WHERE name LIKE '%$search%' 
-                            OR brand LIKE '%$search%'
                             OR category LIKE '%$search%'";
 
                     $result = $conn->query($sql);
@@ -71,10 +69,9 @@
                                 <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
                                     <td class="px-6 py-4">'.$row["name"].'</td>
                                     <td class="px-6 py-4">'.$row["category"].'</td>
-                                    <td class="px-6 py-4">'.$row["brand"].'</td>
                                     <td class="px-6 py-4">'.$row["quantity"].'</td>
-                                    <td class="px-6 py-4">'.$row["unitCost"].'</td>
-                                    <td class="px-6 py-4">'.$row["salePrice"].'</td>
+                                    <td class="px-6 py-4">'.'$ '.number_format($row["unitCost"],2).'</td>
+                                    <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"],2).'</td>
                                     <td class="px-6 py-4">
                                         <form action="./scripts/vendor_script.php" method="POST"> 
                                             <button name="editUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
@@ -92,7 +89,7 @@
                     }else{
                         echo '
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
-                            <td colSpan="7" class="px-6 py-4 text-center">No Results</td>
+                            <td colSpan="6" class="px-6 py-4 text-center">No Results</td>
                         </tr>';
                     }
                     

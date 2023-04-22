@@ -2,6 +2,7 @@
     include './scripts/utils.php';
     session_start();
     if(!isVendorAuth()) header("Location: ./login.php"); 
+    if(!isset($_SESSION['userId']))header("Location: ./login.php");  
     if(isset($_SESSION['errors'])) unset($_SESSION['errors']);	
 ?>
 
@@ -47,7 +48,6 @@
                 <tr>
                     <th scope="col" class="px-6 py-4">Name</th>
                     <th scope="col" class="px-6 py-4">Category</th>
-                    <th scope="col" class="px-6 py-4">Brand</th>
                     <th scope="col" class="px-6 py-4">Stock</th>
                     <th scope="col" class="px-6 py-4">Unit Cost</th>
                     <th scope="col" class="px-6 py-4">Sale Price</th>
@@ -59,17 +59,16 @@
                     $vendorId = $_SESSION['userId'];
                     $sql = "SELECT * FROM products where vendorId ='$vendorId'";
                     $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
+                    if ($result!== false && $result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             
                             echo '
                             <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
                                 <td class="px-6 py-4">'.$row["name"].'</td>
                                 <td class="px-6 py-4">'.$row["category"].'</td>
-                                <td class="px-6 py-4">'.$row["brand"].'</td>
                                 <td class="px-6 py-4">'.$row["quantity"].'</td>
-                                <td class="px-6 py-4">'.$row["unitCost"].'</td>
-                                <td class="px-6 py-4">'.$row["salePrice"].'</td>
+                                <td class="px-6 py-4">'.'$ '.number_format($row["unitCost"],2).'</td>
+                                <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"],2).'</td>
                                 <td class="px-6 py-4">
                                     <form action="./scripts/vendor_script.php" method="POST"> 
                                         <button name="editUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
@@ -86,6 +85,11 @@
                                 
                             ';
                         }
+                    }else{
+                        echo '
+                        <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
+                            <td colSpan="6" class="px-6 py-4 text-center">No Results</td>
+                        </tr>';
                     }
                     
                     if ($conn) $conn-> close();

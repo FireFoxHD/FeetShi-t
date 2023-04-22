@@ -96,7 +96,7 @@
 
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">Phone number</label> <?php echo $_SESSION['errPhone']; ?>
-                    <input name="phone" type="text" value="<?php echo $phone?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input name="phone" type="text" placeholder="111-111-1111" value="<?php echo $phone?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
             
                 </div> 
     
@@ -123,6 +123,7 @@
                         <option value="" selected disabled hidden>Select Account Type</option>
                         <option value="admin">Admin</option>
                         <option value="vendor">Vendor</option>
+                        <option value="guest">Guest</option>
                     </select>
                 </div> 
 

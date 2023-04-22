@@ -77,6 +77,7 @@
     function isAdminAuth(){
         if(session_status() === PHP_SESSION_NONE) session_start();
         if(!isset($_SESSION['userId']) or !isLoggedIn($_SESSION['userId']) or !(getAccType($_SESSION['userId']) == "admin")){
+            
             return false;
         }
         return true;

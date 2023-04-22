@@ -3,7 +3,6 @@
     $prodId = "";
     $productName = "";
     $productCategory = "";
-    $productBrand = "";
     $productDesc = "";
     $productSalePrice = "";
     $imgPath = "";
@@ -21,7 +20,6 @@
             while ($row = $result->fetch_assoc()) {
                 $productName = $row['name'];
                 $productCategory = $row['category'];
-                $productBrand = $row['brand'];
                 $productDesc = $row['description'];
                 $productSalePrice = $row['salePrice'];
                 $imgPath = $row['imgPath'];
@@ -60,11 +58,15 @@
 
     <div class="antialiased">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-            <div class="flex flex-col md:flex-row -mx-4">
-                <img class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4" src="<?php echo $imgPath ?>">
+            <div class="flex flex-col md:flex-row my-32 mx-4">
+
+                <div class="h-64 md:h-80 bg-gray-100 mb-4 aspect-square rounded-lg overflow-hidden">
+					<img class="h-full w-full object-cover" src="<?php echo $imgPath ?>"/>
+				</div>
+              
                 <div class="md:flex-1 px-4">
                     <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"><?php echo $productName ?></h2>
-                    <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline"><?php echo $firstname." ".$lastname ?></a></p>
+                    <p class="text-gray-500 text-sm">By <span class="text-indigo-600"><?php echo $firstname." ".$lastname ?></span></p>
 
                     <div class="flex items-center space-x-4 my-4">
                         <div>
