@@ -75,8 +75,8 @@
                 </div>
     
                 <div class="m-2 w-full">
-                     <label class="text-blueGray-600 font-bold mb-2">Description</label> <!-- Sanitize in backend -->
-                    <input name="productDescription" type="text" value="<?php echo $productDesc?>"  class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150" autocomplete="off">
+                    <label class="text-blueGray-600 font-bold mb-2">Description</label> <!-- Sanitize in backend -->
+                    <textarea name="productDescription" type="text" value="<?php echo $productDesc?>"  class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150" autocomplete="off"></textarea>
                 
                 </div>
     

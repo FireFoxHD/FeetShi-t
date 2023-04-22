@@ -41,6 +41,7 @@
             $sql = "SELECT * FROM users WHERE email ='$email' and hashed_pwd = '$hashed_pwd'";
             $result = $conn->query($sql);
             $_SESSION['userId'] = "";
+            $_SESSION['accType'] = "";
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {

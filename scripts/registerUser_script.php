@@ -82,23 +82,27 @@
             }
         }
 
-        $dob = trim($_POST["dob"]);
-        if (empty($dob)){
-            createError("dob", "errDob", "Your date of birth is required!"); 
-        }else{
-            $_SESSION['dob'] = $dob;
-            $_SESSION['errDob'] = '';
-        }
+        // $dob = trim($_POST["dob"]);
+        // if (empty($dob)){
+        //     createError("dob", "errDob", "Your date of birth is required!"); 
+        // }else{
+        //     $_SESSION['dob'] = $dob;
+        //     $_SESSION['errDob'] = '';
+        // }
+
+  
+        $accType = isset($_POST["accType"]) && !empty($_POST["accType"]) ? $_POST["accType"] : "vendor";
+        
         
         if ($_SESSION['errors']){
-            header("Location: ../addUsers.php");
+            header("Location: ../admin.php");
         }else{
             include 'dbConnection.php';
             //hash the password
-            $hashed_pwd = hash('sha256',$password_1);
+            $hashed_pwd = hash('sha256', $password_1);
             $id = uniqid();
             $insert_query = "INSERT INTO users (id, firstname, lastname, email, hashed_pwd,  dob, phone, accType)
-                VALUES ( '$id', '$firstname','$lastname','$email','$hashed_pwd','$dob', '$phone' , '$accType', 'inactive')";
+                VALUES ( '$id', '$firstname','$lastname','$email','$hashed_pwd','', '$phone' , '$accType', 'inactive')";
             echo $insert_query."<br>";
             $result = $conn->query($insert_query);
             

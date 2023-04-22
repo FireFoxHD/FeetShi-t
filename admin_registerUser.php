@@ -3,6 +3,27 @@
 	session_start();
     if(!isAdminAuth()) header("Location: ./login.php");
     
+    if(!isset(
+        $_SESSION['firstname'],
+        $_SESSION['lastname'],
+        $_SESSION['email'],
+        $_SESSION['password_1'],
+        $_SESSION['password_2'],
+        $_SESSION['phone']) && isset($_SESSION['errors'])
+    ){
+        $_SESSION['firstname'] = "";
+        $_SESSION['lastname'] = "";
+        $_SESSION['email'] = "";
+        $_SESSION['password_1'] = "";
+        $_SESSION['password_2'] = "";
+        $_SESSION['phone'] = "";
+        $_SESSION['errFirstname'] = "";
+        $_SESSION['errLastname'] = "";
+        $_SESSION['errEmail'] = "";
+        $_SESSION['errPassword'] = "";
+        $_SESSION['errPhone'] = "";
+    }
+    
 	if(isset($_SESSION['errors'])){
         //to persist values after form submission in case use made an error
         $firstname = $_SESSION['firstname'];
@@ -33,7 +54,6 @@
         $_SESSION['errEmail'] = "";
         $_SESSION['errPassword'] = "";
         $_SESSION['errPhone'] = "";
-
 
     }
 ?>
@@ -96,6 +116,17 @@
                     <input name="password_2" type="password" value="<?php echo $password_2?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                 
                 </div>
+
+                <div class="m-2 w-full">
+                    <label class="text-blueGray-600 font-bold mb-2">Account type</label>
+                    <select name="accType" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" required>
+                        <option value="" selected disabled hidden>Select Account Type</option>
+                        <option value="admin">Admin</option>
+                        <option value="vendor">Vendor</option>
+                    </select>
+                </div> 
+
+                
     
     
                 <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-32 rounded my-4" id="saveForm" type="submit" name="submit" value="Sign up" />

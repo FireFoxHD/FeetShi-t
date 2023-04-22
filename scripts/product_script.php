@@ -99,9 +99,8 @@
     }
 
     if (isset($_POST['saveProduct'])){ 
-
-        $target_dir = "../productImages/";
-        $target_file = $target_dir.basename($_FILES["productImg"]["name"]);
+        $target_file = "../productImages/".basename($_FILES["productImg"]["name"]);
+        $imgPath = "./productImages/".basename($_FILES["productImg"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
         // Check if image file is a actual image or fake image
@@ -150,10 +149,14 @@
             if (move_uploaded_file($_FILES["productImg"]["tmp_name"], $target_file)) {
                 $_SESSION['uploadStatus'] = "";
                 $insert_query = "INSERT INTO products (id, vendorId, name, description, category, brand, unitCost, salePrice, quantity, imgPath)
-                VALUES ('$id', '$user','$productName','$productDesc','$productCategory', '$productBrand' , '$productCostPrice', '$productSalePrice', '$productStockQuantity', '$target_file')";
+                VALUES ('$id', '$user','$productName','$productDesc','$productCategory', '$productBrand' , '$productCostPrice', '$productSalePrice', '$productStockQuantity', '$imgPath')";
            
-                $result = $conn->query($insert_query);
+                
 
+                $result = $conn->query($insert_query);
+                
+                echo $insert_query;
+                echo $result;
                         
                 if ($result === TRUE){
                     $_SESSION['uploadStatus'] = "<span style='color:green;text-align:left;'>Data Inserted Successfully!</span> <br>";

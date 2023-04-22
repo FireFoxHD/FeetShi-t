@@ -7,6 +7,9 @@
     $productDesc = "";
     $productSalePrice = "";
     $imgPath = "";
+    $vendorId = "";
+    $firstname = "";
+    $lastname = "";
 
     if(isset($_GET['id'])){
         include './scripts/dbConnection.php';
@@ -22,8 +25,19 @@
                 $productDesc = $row['description'];
                 $productSalePrice = $row['salePrice'];
                 $imgPath = $row['imgPath'];
+                $vendorId = $row['vendorId'];
             }
         }
+
+        $sql = "SELECT * FROM users WHERE id = '$vendorId'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $firstname = $row['firstname'];
+                $lastname = $row['lastname'];
+            }
+        }
+
     }
 ?>
 
@@ -50,19 +64,19 @@
                 <img class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4" src="<?php echo $imgPath ?>">
                 <div class="md:flex-1 px-4">
                     <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"><?php echo $productName ?></h2>
-                    <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline"><?php echo $productName ?></a></p>
+                    <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline"><?php echo $firstname." ".$lastname ?></a></p>
 
                     <div class="flex items-center space-x-4 my-4">
                         <div>
                             <div class="rounded-lg bg-gray-100 flex py-2 px-3">
                                 <span class="text-indigo-400 mr-1 mt-1">$</span>
-                                <span class="font-bold text-indigo-600 text-3xl"><?php echo $productSalePrice ?></span>
+                                <span class="font-bold text-indigo-600 text-3xl"><?php echo number_format($productSalePrice, 2) ?></span>
                             </div>
                         </div>
-                        <div class="flex-1">
+                        <!-- <div class="flex-1">
                             <p class="text-green-500 text-xl font-semibold">Save 12%</p>
                             <p class="text-gray-400 text-sm">Inclusive of all Taxes.</p>
-                        </div>
+                        </div> -->
                     </div>
 
                     <p class="text-gray-500">

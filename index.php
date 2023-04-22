@@ -24,7 +24,7 @@ if (isset($_SESSION['userId'])) {
 	<title>Feetsh*t</title>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
 	<?php require './components/header.php'; ?>
 	<?php require './scripts/dbConnection.php'; ?>
 
@@ -52,6 +52,7 @@ if (isset($_SESSION['userId'])) {
 			}
 		?>
     </div>
+	<?php require './components/footer.php'; ?>
 </body>
 
 </html>
