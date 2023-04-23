@@ -16,7 +16,7 @@
         $prodId = $_GET['id'];
         $sql = "SELECT * FROM products WHERE id = '$prodId'";
 		$result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        if ($result !== false && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $productName = $row['name'];
                 $productCategory = $row['category'];
@@ -29,7 +29,7 @@
 
         $sql = "SELECT * FROM users WHERE id = '$vendorId'";
         $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        if ($result !== false && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $firstname = $row['firstname'];
                 $lastname = $row['lastname'];

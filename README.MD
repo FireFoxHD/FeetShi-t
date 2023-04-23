@@ -13,9 +13,7 @@ password: 12345678A!
 ```
 
 ### TODO:
-- Create/fix landing page for guests (index.php)
+- Update/make look better landing page for guests (index.php)
 - Allow edit and delete of users (by admin)
 - Allow edit and delete of products (by vendor)
-- sanitize ALL inputs
-- populate product page with data for specific item
-- fix header navigation from product page
+- sanitize ALL input

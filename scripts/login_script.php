@@ -39,7 +39,7 @@
             $_SESSION['userId'] = "";
             $_SESSION['accType'] = "";
 
-            if ($result->num_rows > 0) {
+            if ($result !== false && $result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     $_SESSION['accType'] = $row["accType"];
                     $_SESSION['userId'] = $row["id"];

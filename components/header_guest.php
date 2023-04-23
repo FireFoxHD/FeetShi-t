@@ -36,10 +36,10 @@
                         </svg>
                     </div>
 
-                    <form action="./scripts/logout_script.php" method="POST">
-                        <button name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
+                    <form class="flex items-center space-x-4" action="./scripts/logout_script.php" method="POST">
+                        <a href="/cart.php" name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
                         View Cart
-                        </button>
+                        </a>
                         <button name="logout" class="flex h-10 items-center px-5 rounded-lg border border-2 border-gray-200 hover:border-gray-300 focus:outline-none hover:shadow-inner">
                         Log out
                         </button>
