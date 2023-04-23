@@ -50,6 +50,7 @@ if (isset($_SESSION['userId'])) {
 					';
 				}
 			}
+			if ($conn) $conn-> close();
 		?>
     </div>
 	<?php require './components/footer.php'; ?>

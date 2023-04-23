@@ -9,6 +9,7 @@
     $vendorId = "";
     $firstname = "";
     $lastname = "";
+    $inStock = true;
 
     if(isset($_GET['id'])){
         include './scripts/dbConnection.php';
@@ -24,6 +25,7 @@
                 $productSalePrice = $row['salePrice'];
                 $imgPath = $row['imgPath'];
                 $vendorId = $row['vendorId'];
+                $inStock = $row['quantity'] > 0 ? true : false;
             }
         }
 
@@ -74,18 +76,24 @@
                                 <span class="text-indigo-400 mr-1 mt-1">$</span>
                                 <span class="font-bold text-indigo-600 text-3xl"><?php echo number_format($productSalePrice, 2) ?></span>
                             </div>
-                        </div>
-                        <!-- <div class="flex-1">
-                            <p class="text-green-500 text-xl font-semibold">Save 12%</p>
-                            <p class="text-gray-400 text-sm">Inclusive of all Taxes.</p>
-                        </div> -->
+                        </div> 
+                        
+                        <div class="flex-1">
+                            <?php
+                                if(!$inStock) echo '<p class="text-red-600 text-lg font-bold">OUT OF STOCK!</p>';
+
+                                if(isset($_SESSION['actionMsg'])){
+                                    echo '<p class="text-red-600 text-lg font-bold">'.$_SESSION['actionMsg'].'</p>'; 
+                                }
+                            ?>
+                        </div>  
                     </div>
 
                     <p class="text-gray-500">
                         <?php echo $productDesc ?>
                     </p>
 
-                    <form action="./scripts/cart_script.php" method="POST">
+                    <form action="<?php echo './scripts/cart_script.php?id='.$prodId ?>" method="POST">
                         <div class="flex ml-6 items-center m-4">
                             <span class="mr-3">Size</span>
                             <div class="relative">
@@ -106,7 +114,7 @@
                                     </svg>
                                 </span>
                             </div>
-                            <input value="Add to Cart" name="addToCart" type="submit" class="h-12 mx-6 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"/>
+                            <input value="Add to Cart" name="addToCart" type="submit" class="h-12 mx-6 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white disabled:bg-indigo-400  enabled:hover:bg-indigo-400" <?php if(!$inStock) echo 'disabled="disabled"'; ?>/>
                         </div>
                     </form>
 
