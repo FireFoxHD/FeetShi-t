@@ -6,8 +6,8 @@
     $_SESSION['errors'] = false;	// Set to no errors
 
     if (isset($_POST["editUserBtn"])){
-        $_SESSION['userId'] = $_POST['editUser'];
-        header("Location: ../admin_editUser.php");
+        $userId = $_POST['editUserBtn'];
+        header("Location: ../admin_editUser.php?id=".$userId);
     }
 
     if (isset($_POST["deleteUserBtn"])){

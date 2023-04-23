@@ -25,11 +25,6 @@
                             <a href="/contact.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Contact Us</a>
                         </li>
 
-                        <li>
-                            <a href="/cart.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">CART</a>
-                        </li>
-
-                        
                     </ul>
                 </nav>
 
@@ -41,14 +36,14 @@
                         </svg>
                     </div>
 
-                   
-                    <a href="login.php" class="flex h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
-                        <span class="text-white text-md">Login</span>
-                    </a>
-
-                    <a href="register.php" class="flex h-10 items-center px-5 rounded-lg border border-2 border-gray-200 hover:border-gray-300 focus:outline-none hover:shadow-inner">
-                        <span class="text-gray-500 text-md">Sign up</span>
-                    </a>
+                    <form action="./scripts/logout_script.php" method="POST">
+                        <button name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
+                        View Cart
+                        </button>
+                        <button name="logout" class="flex h-10 items-center px-5 rounded-lg border border-2 border-gray-200 hover:border-gray-300 focus:outline-none hover:shadow-inner">
+                        Log out
+                        </button>
+                    </form>
 
                 </div>
             </div>

@@ -47,7 +47,9 @@
                
     </div>
 
-    <p class="text-center text-md font-bold"><?php echo $_SESSION['actionMsg']?></p>
+    <!-- <p class="text-center text-md font-bold">
+        <?php //echo $_SESSION['actionMsg']?>
+    </p> -->
 
     <div class="flex flex-col items-center justify-center w-full">
         

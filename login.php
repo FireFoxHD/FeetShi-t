@@ -61,7 +61,7 @@
             <form class="flex flex-col items-center justify-center my-6 w-full" action="./scripts/login_script.php" method="POST">
                 
                 <div class="m-2 w-full">
-                    <label class="text-blueGray-600 font-bold mb-2">Email</label><?php echo $_SESSION['errEmail']; ?>
+                    <label class="text-blueGray-600 font-bold mb-2">Email or Username</label><?php echo $_SESSION['errEmail']; ?>
                     <input name="email" type="text" value="<?php echo $email?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                 </div>
     

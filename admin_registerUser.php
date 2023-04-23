@@ -4,6 +4,7 @@
     if(!isAdminAuth()) header("Location: ./login.php");
     
     if(!isset(
+        $_SESSION['username'],
         $_SESSION['firstname'],
         $_SESSION['lastname'],
         $_SESSION['email'],
@@ -11,12 +12,14 @@
         $_SESSION['password_2'],
         $_SESSION['phone']) && isset($_SESSION['errors'])
     ){
+        $_SESSION['username'] = "";
         $_SESSION['firstname'] = "";
         $_SESSION['lastname'] = "";
         $_SESSION['email'] = "";
         $_SESSION['password_1'] = "";
         $_SESSION['password_2'] = "";
         $_SESSION['phone'] = "";
+        $_SESSION['errUsername'] = "";
         $_SESSION['errFirstname'] = "";
         $_SESSION['errLastname'] = "";
         $_SESSION['errEmail'] = "";
@@ -26,6 +29,7 @@
     
 	if(isset($_SESSION['errors'])){
         //to persist values after form submission in case use made an error
+        $username = $_SESSION['username'];
         $firstname = $_SESSION['firstname'];
         $lastname =  $_SESSION['lastname'];
         $email = $_SESSION['email'];
@@ -35,12 +39,15 @@
 		unset($_SESSION['errors']);		
 	}else{
         // Field values
+        $_SESSION['username'] = "";
+        $_SESSION['firstname'] = "";
         $_SESSION['firstname'] = "";
         $_SESSION['lastname'] = "";
         $_SESSION['email'] = "";
         $_SESSION['password_1'] = "";
         $_SESSION['password_2'] = "";
         $_SESSION['phone'] = "";
+        $username = "";
         $firstname = "";
         $lastname =  "";
         $email = "";
@@ -49,6 +56,7 @@
         $phone = "";
 
         //Error field values
+        $_SESSION['errUsername'] = "";
         $_SESSION['errFirstname'] = "";
         $_SESSION['errLastname'] = "";
         $_SESSION['errEmail'] = "";
@@ -82,6 +90,12 @@
 
         <div class="flex items-center justify-center w-1/4">
             <form class="flex flex-col items-center justify-center my-6 w-full" action="./scripts/registerUser_script.php" method="POST">
+                <div class="m-2 w-full">
+                    <label class="text-blueGray-600 font-bold mb-2">Username</label><?php echo $_SESSION['errUsername']; ?>
+                    <input name="username" type="text" value="<?php echo $username?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    
+                </div>
+
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">First name</label><?php echo $_SESSION['errFirstname']; ?>
                     <input name="firstname" type="text" value="<?php echo $firstname?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">

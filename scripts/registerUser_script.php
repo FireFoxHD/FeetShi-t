@@ -6,6 +6,31 @@
 
     // Get the data from the form
     if (isset($_POST["submit"])){
+
+        $username = trim($_POST["username"]);
+        
+        // validate first name
+        if (empty($username)){					
+            createError("username", "errUsername", "Your First Name is required!"); 
+        }else{
+            if (preg_match("/^[a-zA-Z]*$/",$username)){
+                //check if exists in db
+                include 'dbConnection.php';
+            
+                $sql = "SELECT * FROM users WHERE username = '$username'";
+                $result = $conn->query($sql);
+
+                if ($result == false || $result->num_rows == 0) {
+                    $_SESSION['username'] = $username;
+                    $_SESSION['errUsername'] = "";
+                }else{
+                    createError("username", "errUsername", "Username Already exists"); 
+                }
+                if ($conn)$conn->close();
+            }else{
+                createError("username", "errUsername", "Your Username can only contain letters!"); 
+            }
+        }
         
         $firstname = trim($_POST["firstname"]);
         $lastname = trim($_POST["lastname"]);
@@ -40,8 +65,19 @@
         }else{
             
             if (filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $_SESSION['email'] = $email;
-                $_SESSION['errEmail'] = "";
+                include 'dbConnection.php';
+            
+                $sql = "SELECT * FROM users WHERE email = '$email'";
+                $result = $conn->query($sql);
+
+                if ($result == false || $result->num_rows == 0) {
+                    $_SESSION['email'] = $email;
+                    $_SESSION['errEmail'] = "";
+                }else{
+                    createError("email", "errEmail", "Email Already exists"); 
+                }
+                if ($conn)$conn->close();
+              
             }else{    
                 createError("email", "errEmail", "Your email address is not valid!"); 
             }
@@ -82,16 +118,8 @@
             }
         }
 
-        // $dob = trim($_POST["dob"]);
-        // if (empty($dob)){
-        //     createError("dob", "errDob", "Your date of birth is required!"); 
-        // }else{
-        //     $_SESSION['dob'] = $dob;
-        //     $_SESSION['errDob'] = '';
-        // }
-
   
-        $accType = isset($_POST["accType"]) && !empty($_POST["accType"]) ? $_POST["accType"] : "vendor";
+        $accType = isset($_POST["accType"]) && !empty($_POST["accType"]) ? $_POST["accType"] : "guest";
         
         
         if ($_SESSION['errors']){
@@ -114,7 +142,6 @@
 
             //close connection
             if ($conn)$conn->close();
-            session_destroy();
             header("Location: ../admin.php");
         }
 }

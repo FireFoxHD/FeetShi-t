@@ -9,24 +9,20 @@
         if (empty($email)){
             createError("email", "errEmail", "Your email address is required!"); 
         }else{
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $_SESSION['email'] = $email;
-                $_SESSION['errEmail'] = "";
-            }else{
-                createError("email", "errEmail", "Your email address is not valid!"); 
-            }
+            $_SESSION['email'] = $email;
+            $_SESSION['errEmail'] = "";
         }
    
         $password = trim($_POST["password"]);
         if (empty($password)){
             createError("password", "errPassword", "Your password is required!"); 
         }else{
-            // if (preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
+            if (preg_match("/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
                 $_SESSION['password'] = $password;
                 $_SESSION['errPassword'] = "";			
-            // }else{
-            //     createError("password", "errPassword", "Your password is not valid!"); 
-            // }
+            }else{
+                createError("password", "errPassword", "Your password is not valid!"); 
+            }
         }
         
         if ($_SESSION['errors']){
@@ -38,7 +34,7 @@
            
             $hashed_pwd = hash('sha256', $password);
             
-            $sql = "SELECT * FROM users WHERE email ='$email' and hashed_pwd = '$hashed_pwd'";
+            $sql = "SELECT * FROM users WHERE (email ='$email' or username='$email') and hashed_pwd = '$hashed_pwd'";
             $result = $conn->query($sql);
             $_SESSION['userId'] = "";
             $_SESSION['accType'] = "";

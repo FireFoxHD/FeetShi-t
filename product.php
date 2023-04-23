@@ -85,25 +85,32 @@
                         <?php echo $productDesc ?>
                     </p>
 
-                    <div class="flex ml-6 items-center m-4">
-                        <span class="mr-3">Size</span>
-                        <div class="relative">
-                            <select class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                                <option>SM</option>
-                                <option>M</option>
-                                <option>L</option>
-                                <option>XL</option>
-                            </select>
-                            <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
-                                    <path d="M6 9l6 6 6-6"></path>
-                                </svg>
-                            </span>
+                    <form action="./scripts/cart_script.php" method="POST">
+                        <div class="flex ml-6 items-center m-4">
+                            <span class="mr-3">Size</span>
+                            <div class="relative">
+                                <select name='shoeSize' class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10" required>
+                                    <option value="" selected disabled hidden>US Size</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                </select>
+                                <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
+                                        <path d="M6 9l6 6 6-6"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <input value="Add to Cart" name="addToCart" type="submit" class="h-12 mx-6 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"/>
                         </div>
-                        <button type="button" class="h-12 mx-6 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
-                            Add to Cart
-                        </button>
-                    </div>
+                    </form>
+
+                   
                 </div>
             </div>
         </div>
