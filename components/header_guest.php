@@ -19,10 +19,10 @@
                             <a href="#" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Collections</a>
                         </li>
                         <li>
-                            <a href="/about.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">About Us</a>
+                            <a href="about.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">About Us</a>
                         </li>
                         <li>
-                            <a href="/contact.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Contact Us</a>
+                            <a href="contact.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Contact Us</a>
                         </li>
 
                     </ul>
