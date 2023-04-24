@@ -17,12 +17,8 @@
         if (empty($password)){
             createError("password", "errPassword", "Your password is required!"); 
         }else{
-            if (preg_match("/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/",$password)){
-                $_SESSION['password'] = $password;
-                $_SESSION['errPassword'] = "";			
-            }else{
-                createError("password", "errPassword", "Your password is not valid!"); 
-            }
+            $_SESSION['password'] = $password;
+            $_SESSION['errPassword'] = "";			   
         }
         
         if ($_SESSION['errors']){
@@ -64,6 +60,4 @@
             }
            
         }
-    }else{
-        header("Location: ../login.php");
     }

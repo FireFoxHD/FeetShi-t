@@ -115,7 +115,7 @@
     
                 <div class="m-2 w-full">
                     <label class=" text-blueGray-600 font-bold mb-2">Email</label><?php echo $_SESSION['errEmail']; ?>
-                    <input name="email" type="text" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input name="email" type="text" value="<?php echo $email?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                 </div>
     
                 <div class="m-2 w-full">
@@ -125,7 +125,7 @@
                 </div>
 
                 <div class="m-2 w-full">
-                    <label class="text-blueGray-600 font-bold mb-2">Confirm Password</label> <?php echo $_SESSION['errPassword']; ?>
+                    <label class="text-blueGray-600 font-bold mb-2">Confirm Password</label>
                     <input name="password_2" type="password" value="<?php echo $password_2?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                 
                 </div>

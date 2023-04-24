@@ -107,9 +107,11 @@
            
                 if (preg_match("/^(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[a-zA-Z]).*$/",$password_1)){
                     $_SESSION['password_1'] = $password_1;
+                    $_SESSION['password_2'] = $password_2;
                     $_SESSION['errPassword'] = ""; 
                 }else{
-                    createError("password_1", "errPassword", "Your password must be at least 8 characters long and contain at least one number and one special character!"); 
+                    createError("password_1", "errPassword", "Your password must be at least 8 characters long and contain at least one number and one special character!");
+                    createError("password_2", "errPassword", "Your password must be at least 8 characters long and contain at least one number and one special character!");  
                 }
                 
             }else{
@@ -136,14 +138,19 @@
             $hashed_pwd = hash('sha256', $password_1);
             $id = uniqid();
             $insert_query = "INSERT INTO users (id, username, firstname, lastname, email, hashed_pwd, phone, accType, status)
-                VALUES ( '$id', $username, '$firstname','$lastname','$email','$hashed_pwd','$phone', '$accType', 'inactive')";
+                VALUES ( '$id', '$username', '$firstname','$lastname','$email','$hashed_pwd','$phone', '$accType', 'inactive')";
            
             $result = $conn->query($insert_query);
             
             if ($result === TRUE){
                 echo "<span style='color:green;text-align:left;'>Data Inserted Successfully!</span> <br>";
             }else{
-                echo "<span style='color:red;text-align:left;'>Data Insertion Failed!</span> <br>";
+                //set error
+                $_SESSION['errors'] = true;
+                if ($conn)$conn->close();
+                header("Location: ../register.php");
+                exit();
+                // echo "<span style='color:red;text-align:left;'>Data Insertion Failed!</span> <br>";
             }
 
             //close connection

@@ -13,11 +13,14 @@ password: 12345678A!
 ``````
 
 ### TODO:
-- Update/make look better landing page for guests (index.php)
+- view orders
 - Allow edit and delete of products (by vendor and by admin)
-- sanitize ALL input- make error page
-- accept multiple images
-- improve search
-- save order to DB and email reciept
-- lowercase username before adding and seraching db
+- make error page
 - display errors from admin Edit user
+- display errors from register.php
+- redirect user to a page to show order success 
+- lowercase username before adding and searching db
+- accept multiple images
+- sanitize ALL input 
+- improve search
+- Update/make look better landing page for guests (index.php)
