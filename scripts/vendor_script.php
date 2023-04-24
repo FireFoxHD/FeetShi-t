@@ -1,10 +1,12 @@
 <?php 
     include 'utils.php';
     session_start();
-    if(!isVendorAuth()) header("Location: ./login.php");
+    if(!(isVendorAuth()||isAdminAuth())) header("Location: ./login.php");
+   
     
     $_SESSION['errors'] = false;	// Set to no errors
 
+    //TODO: this
     if (isset($_POST["editProductBtn"])){
         $prodId = $_POST['editProductBtn'];
         header("Location: ../vendor_editProduct.php?id='$prodId'");
@@ -23,7 +25,18 @@
         }
 
         if ($conn)$conn->close();
-        header("Location: ../vendor.php");
+        unset($_POST["deleteProductBtn"]);
+        if(isVendorAuth()){
+            header("Location: ../vendor.php");
+            exit();
+        }
+
+        if(isAdminAuth()){
+            header("Location: ../admin_viewProducts.php");
+            exit();
+        }
+
+        
     } 
 
         

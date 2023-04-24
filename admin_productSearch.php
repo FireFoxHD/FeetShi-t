@@ -1,7 +1,7 @@
 <?php
     include './scripts/utils.php';
     session_start();
-    if(!isVendorAuth()) header("Location: ./login.php");
+    if(!isAdminAuth()) header("Location: ./login.php");
     if(!isset($_POST["searchBtn"]) && !isset($_POST["search"]))
         header("Location: ./vendor.php");
 ?>
@@ -19,11 +19,11 @@
     <title>Feetsh*t</title>
 </head>
 <body>
-    <?php require './components/header_vendor.php'; ?>
+    <?php require './components/header_admin.php'; ?>
     <?php include './scripts/dbConnection.php'; ?>
 
     <div class="flex flex-col my-16 w-full items-center justify-center">
-        <h1 class="font-bold text-gray-700 text-4xl text-center my-4">View your Products</h1> 
+        <h1 class="font-bold text-gray-700 text-4xl text-center my-4">View Products</h1> 
 
         <form class="flex items-center mt-4" action="./vendor_search.php" method="POST">   
             <label for="search" class="sr-only">Search</label>
@@ -45,6 +45,7 @@
         <table class="text-center text-sm font-light w-2/3">
             <thead class="bg-neutral-800 font-medium text-white uppercase ">
                 <tr>
+                    <th scope="col" class="px-6 py-4">Vendor ID</th>
                     <th scope="col" class="px-6 py-4">Name</th>
                     <th scope="col" class="px-6 py-4">Category</th>
                     <th scope="col" class="px-6 py-4">Stock</th>
@@ -55,12 +56,11 @@
             </thead>
             <tbody>
                 <?php
-                    $vendorId = $_SESSION['userId'];
+
                     $search = mysqli_real_escape_string($conn, $_POST['search']);
                     $sql = "SELECT * FROM products
                             WHERE name LIKE '%$search%' 
-                            OR category LIKE '%$search%'
-                            AND vendorId ='$vendorId'";
+                            OR category LIKE '%$search%'";
 
                     $result = $conn->query($sql);
 
@@ -68,6 +68,7 @@
                         while($row = $result->fetch_assoc()) {
                             echo '
                                 <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
+                                    <td class="px-6 py-4">'.$row["vendorId"].'</td>
                                     <td class="px-6 py-4">'.$row["name"].'</td>
                                     <td class="px-6 py-4">'.$row["category"].'</td>
                                     <td class="px-6 py-4">'.$row["quantity"].'</td>
@@ -75,10 +76,10 @@
                                     <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"],2).'</td>
                                     <td class="px-6 py-4">
                                         <form action="./scripts/vendor_script.php" method="POST"> 
-                                            <button name="editProductBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+                                            <button name="editUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
                                                 <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
                                             </button>
-                                            <button name="deleteProductBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500  text-white hover:bg-red-600">
+                                            <button name="deleteUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500  text-white hover:bg-red-600">
                                                 <i class="fa fa-trash text-white px-2" aria-hidden="true"></i>Delete
                                             </button>
                                         </form>

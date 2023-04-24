@@ -13,6 +13,10 @@
                             <li>
                                 <a href="admin_registerUser.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Add User</a>
                             </li>
+
+                            <li>
+                                <a href="admin_viewProducts.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">View Products</a>
+                            </li>
                            
                         </ul>
                     </nav>
@@ -21,10 +25,8 @@
 
                 <div class="flex items-center">
                     <p class="mx-8 font-bold text-2xl text-gray-500">Admin Dashboard</p>
-                    <form action="./scripts/logout_script.php" method="POST">
-                        <button name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
-                         Log out
-                        </button>
+                    <form action="./scripts/logout_script.php" method="POST">     
+                        <input type="submit" value="Log out" name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500" />
                     </form>
                 </div>
 

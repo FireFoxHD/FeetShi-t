@@ -1,10 +1,12 @@
 <?php
     include './scripts/utils.php';
     session_start();
-    if(!isVendorAuth()) header("Location: ./login.php");
-    if(!isset($_POST["searchBtn"]) && !isset($_POST["search"]))
-        header("Location: ./vendor.php");
+    if(!isAdminAuth()) header("Location: ./login.php"); 
+    if(!isset($_SESSION['userId']))header("Location: ./login.php");  
+    if(isset($_SESSION['errors'])) unset($_SESSION['errors']);	
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@
     <title>Feetsh*t</title>
 </head>
 <body>
-    <?php require './components/header_vendor.php'; ?>
+    <?php require './components/header_admin.php'; ?>
     <?php include './scripts/dbConnection.php'; ?>
 
     <div class="flex flex-col my-16 w-full items-center justify-center">
@@ -33,11 +35,10 @@
                 </div>
                 <input type="text" name="search" class="pl-10 pr-2 h-10 w-full py-1 rounded-lg border border-gray-400 focus:border-gray-600 focus:outline-none focus:shadow-inner leading-none" placeholder="Search">
             </div>
-            <button type="submit" class="h-10 px-5 mx-4 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500 text-white text-md" name="vendorSearchBtn" type="submit" value="Search">
+            <button type="submit" class="h-10 px-5 mx-4 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500 text-white text-md" name="VendorSearchBtn" type="submit" value="Search">
                 Search
             </button>
         </form>
-               
     </div>
 
     <div class="flex flex-col items-center justify-center w-full">
@@ -45,7 +46,8 @@
         <table class="text-center text-sm font-light w-2/3">
             <thead class="bg-neutral-800 font-medium text-white uppercase ">
                 <tr>
-                    <th scope="col" class="px-6 py-4">Name</th>
+                    <th scope="col" class="px-6 py-4">Vendor ID</th>
+                    <th scope="col" class="px-6 py-4">Product</th>
                     <th scope="col" class="px-6 py-4">Category</th>
                     <th scope="col" class="px-6 py-4">Stock</th>
                     <th scope="col" class="px-6 py-4">Unit Cost</th>
@@ -55,42 +57,40 @@
             </thead>
             <tbody>
                 <?php
-                    $vendorId = $_SESSION['userId'];
-                    $search = mysqli_real_escape_string($conn, $_POST['search']);
-                    $sql = "SELECT * FROM products
-                            WHERE name LIKE '%$search%' 
-                            OR category LIKE '%$search%'
-                            AND vendorId ='$vendorId'";
-
+                
+                    $sql = "SELECT * FROM products";
                     $result = $conn->query($sql);
-
                     if ($result!== false && $result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
+                            
                             echo '
-                                <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
-                                    <td class="px-6 py-4">'.$row["name"].'</td>
-                                    <td class="px-6 py-4">'.$row["category"].'</td>
-                                    <td class="px-6 py-4">'.$row["quantity"].'</td>
-                                    <td class="px-6 py-4">'.'$ '.number_format($row["unitCost"],2).'</td>
-                                    <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"],2).'</td>
-                                    <td class="px-6 py-4">
-                                        <form action="./scripts/vendor_script.php" method="POST"> 
-                                            <button name="editProductBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
-                                                <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
-                                            </button>
-                                            <button name="deleteProductBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500  text-white hover:bg-red-600">
-                                                <i class="fa fa-trash text-white px-2" aria-hidden="true"></i>Delete
-                                            </button>
-                                        </form>
-                                    </td>
+                            <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
+                                <td class="px-6 py-4">'.$row["vendorId"].'</td>
+                                <td class="px-6 py-4">'.$row["name"].'</td>
+                                <td class="px-6 py-4">'.$row["category"].'</td>
+                                <td class="px-6 py-4">'.$row["quantity"].'</td>
+                                <td class="px-6 py-4">'.'$ '.number_format($row["unitCost"],2).'</td>
+                                <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"],2).'</td>
+                                <td class="px-6 py-4">
+                                    <form action="./scripts/vendor_script.php" method="POST"> 
+                                        <button name="editUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+                                            <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
+                                        </button>
+                                        <button name="deleteProductBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500  text-white hover:bg-red-600">
+                                            <i class="fa fa-trash text-white px-2" aria-hidden="true"></i>Delete
+                                        </button>
+                                    </form>
+                                </td>
+                                
+                            </tr>
                                     
-                                </tr>
+                                
                             ';
                         }
                     }else{
                         echo '
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
-                            <td colSpan="6" class="px-6 py-4 text-center">No Results</td>
+                            <td colSpan="7" class="px-6 py-4 text-center">No Results</td>
                         </tr>';
                     }
                     

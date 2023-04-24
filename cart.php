@@ -1,13 +1,10 @@
 <?php
     include './scripts/utils.php';
     session_start();
-    // if(!isVendorAuth()) header("Location: ./login.php"); 
-    // if(!isset($_SESSION['userId']))header("Location: ./login.php");  
+    if(!isset($_SESSION['userId'])) header("Location: ../login.php");
     if(isset($_SESSION['errors'])) unset($_SESSION['errors']);
     if(!isset($_SESSION['cartProducts']) || count($_SESSION['cartProducts']) === 0) $_SESSION['cartProducts'] = array();
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +39,8 @@
             <tbody>
                 <?php
                     $cartProducts = $_SESSION['cartProducts'];
+                    $productId = "";
+                    $size = "";
 
                     if (count($cartProducts) === 0){
                         echo '
@@ -52,7 +51,10 @@
                     }else{
                         include './scripts/dbConnection.php';
 
-                        foreach($cartProducts as $productId => $size) {
+                        foreach($cartProducts as $item) { 
+                            $size = $item["size"];
+                            $productId = $item["productId"];
+
                             $sql = "SELECT * FROM products WHERE id = '$productId'";
                             $result = $conn->query($sql);
 
@@ -62,7 +64,7 @@
                                         <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">  
                                             <td class="px-6 py-4">'.$row["name"].'</td>
                                             <td class="px-6 py-4">'.$size.'</td>
-                                            <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"],2 ).'</td> 
+                                            <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"], 2).'</td> 
                                             <td class="py-4">
                                                 <form action="./scripts/cart_script.php?id='.$productId.'" method="POST"> 
                                                     <button name="deleteItemBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500  text-white hover:bg-red-600">
@@ -75,16 +77,25 @@
                                 }
                             }
     
-                        }
+                        } 
                         if ($conn) $conn-> close();
-                    } 
-                    
+                    }
                 ?>
             </tbody>
         </table>
+
+        <?php   
+            if (count($cartProducts) > 0){
+                echo'
+                    <div class="my-4">
+                        <form action="./checkout.php" method="POST"> 
+                            <input name="checkOutBtn" type="submit" value="Check out" class="px-8 py-3 rounded-lg bg-green-500 text-lg font-bold text-white hover:bg-green-600"/>
+                        </form>
+                    </div>
+                ';
+            }
+        ?>
         
     <div>
-
-
 </body>
 </html>

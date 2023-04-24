@@ -24,9 +24,7 @@
                     <p class="mx-8 font-bold text-2xl text-gray-500">Vendor Dashboard</p>
 
                     <form action="./scripts/logout_script.php" method="POST">
-                        <button name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
-                        Log out
-                        </button>
+                        <input type="submit" value="Log out" name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500"/>
                     </form>
                 </div>
                 

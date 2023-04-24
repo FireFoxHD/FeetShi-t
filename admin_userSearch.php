@@ -25,7 +25,7 @@
     <div class="flex flex-col mt-16 mb-4 w-full items-center justify-center">
         <h1 class="font-bold text-gray-700 text-4xl text-center my-4">View Users</h1> 
 
-        <form class="flex items-center mt-4" action="./admin_search.php" method="POST">   
+        <form class="flex items-center mt-4" action="./admin_userSearch.php" method="POST">   
             <label for="search" class="sr-only">Search</label>
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -54,57 +54,65 @@
             <tbody>
                 <?php
 
-                    $search = mysqli_real_escape_string($conn, $_POST['search']);
-
-                  
-
-                    $sql = "SELECT * FROM users
-                            WHERE firstname LIKE '%$search%' 
-                            OR lastname LIKE '%$search%'
-                            OR email LIKE '%$search%'
-                            OR phone LIKE '%$search%'";
-
-                    $result = $conn->query($sql);
-
-                    if ($result!== false && $result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-
-                        if ($row["status"] == 'inactive')
-                            $colorStyle= 'bg-red-500';
-                        else{
-                            $colorStyle= 'bg-green-500';
-                        }
-
-                        echo '
-                            <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
-                                <td class="px-6 py-4">'.$row["firstname"].'</td>
-                                <td class="px-6 py-4">'.$row["lastname"].'</td>
-                                <td class="px-6 py-4">'.$row["accType"].'</td>
-                                <td class="px-6 py-4">
-                                    <span class="px-4 py-2 rounded-lg text-white '.$colorStyle.'"> '.$row["status"].'</span>  
-                                </td>
-                                <td class="px-6 py-4">
-                                    <form action="./scripts/admin_script.php" method="POST"> 
-                                        <button name="editUser" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600"">
-                                            <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
-                                        </button>
-                                        <button  name="deleteUser" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600"">
-                                            <i class="fa fa-trash text-white px-2" aria-hidden="true"></i>Delete
-                                        </button>
-                                    </form>
-                                </td>
-                                </td>
-                            </tr>    
-                        ';
-                        }
-                    }else{
+                    if(!isset($_POST['search'])){
                         echo '
                         <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
                             <td colSpan="5" class="px-6 py-4 text-center">No Results</td>
                         </tr>';
-                    }
+                    }else{
+
                     
-                    if ($conn) $conn-> close();
+
+                        $search = mysqli_real_escape_string($conn, $_POST['search']);
+                    
+                        $sql = "SELECT * FROM users
+                                WHERE firstname LIKE '%$search%' 
+                                OR lastname LIKE '%$search%'
+                                OR email LIKE '%$search%'
+                                OR phone LIKE '%$search%'";
+
+                        $result = $conn->query($sql);
+
+                        if ($result!== false && $result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+
+                            if ($row["status"] == 'inactive')
+                                $colorStyle= 'bg-red-500';
+                            else{
+                                $colorStyle= 'bg-green-500';
+                            }
+
+                            echo '
+                                <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
+                                    <td class="px-6 py-4">'.$row["firstname"].'</td>
+                                    <td class="px-6 py-4">'.$row["lastname"].'</td>
+                                    <td class="px-6 py-4">'.$row["accType"].'</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-4 py-2 rounded-lg text-white '.$colorStyle.'"> '.$row["status"].'</span>  
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <form action="./scripts/admin_script.php" method="POST"> 
+                                            <button name="editUser" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600"">
+                                                <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
+                                            </button>
+                                            <button  name="deleteUser" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600"">
+                                                <i class="fa fa-trash text-white px-2" aria-hidden="true"></i>Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                    </td>
+                                </tr>    
+                            ';
+                            }
+                        }else{
+                            echo '
+                            <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-200">
+                                <td colSpan="5" class="px-6 py-4 text-center">No Results</td>
+                            </tr>';
+                        }
+                    
+                        if ($conn) $conn-> close();
+                    }
                 ?>
             </tbody>
         </table>

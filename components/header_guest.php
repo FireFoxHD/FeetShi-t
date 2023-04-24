@@ -36,14 +36,14 @@
                         </svg>
                     </div>
 
-                    <form class="flex items-center space-x-4" action="./scripts/logout_script.php" method="POST">
-                        <a href="/cart.php" name="logout" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
-                        View Cart
+                    <div class="flex items-center space-x-4">        
+                        <a href="/cart.php" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
+                            View Cart
                         </a>
-                        <button name="logout" class="flex h-10 items-center px-5 rounded-lg border border-2 border-gray-200 hover:border-gray-300 focus:outline-none hover:shadow-inner">
-                        Log out
-                        </button>
-                    </form>
+                        <form class="m-0 p-0" action="./scripts/logout_script.php" method="POST">
+                            <input type="submit" value="Log out" name="logout" class="flex h-10 items-center px-5 rounded-lg border border-2 border-gray-200 hover:border-gray-300 focus:outline-none hover:shadow-inner"/>
+                        </form>
+                    <div>
 
                 </div>
             </div>
@@ -58,6 +58,8 @@
             </div>
             <!-- Search Mobile -->
 
+        </div>
+            </div>
         </div>
     </div>
 ';?>

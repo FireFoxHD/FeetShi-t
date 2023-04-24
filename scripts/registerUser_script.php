@@ -123,14 +123,20 @@
         
         
         if ($_SESSION['errors']){
-            header("Location: ../admin_registerUser.php");
+            if(!isset($_SESSION['userId'])){
+                header("Location: ../register.php");
+                exit();
+            }else{
+                header("Location: ../admin_registerUser.php");
+                exit();
+            }    
         }else{
             include 'dbConnection.php';
             //hash the password
             $hashed_pwd = hash('sha256', $password_1);
             $id = uniqid();
-            $insert_query = "INSERT INTO users (id, firstname, lastname, email, hashed_pwd, phone, accType, status)
-                VALUES ( '$id', '$firstname','$lastname','$email','$hashed_pwd','$phone', '$accType', 'inactive')";
+            $insert_query = "INSERT INTO users (id, username, firstname, lastname, email, hashed_pwd, phone, accType, status)
+                VALUES ( '$id', $username, '$firstname','$lastname','$email','$hashed_pwd','$phone', '$accType', 'inactive')";
            
             $result = $conn->query($insert_query);
             

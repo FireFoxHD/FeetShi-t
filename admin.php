@@ -2,10 +2,7 @@
 
     include './scripts/utils.php';
     session_start();
-    // var_export(isset($_SESSION['userId']));
-    // var_export(isLoggedIn($_SESSION['userId']));
-    // var_export(getAccType($_SESSION['userId']) == "admin");
-    // var_export(isAdminAuth());
+
     if(!isAdminAuth()) header("Location: ./login.php");
     if(!isset($_SESSION['actionMsg'])) $_SESSION['actionMsg'] = "";
     
@@ -32,7 +29,7 @@
     <div class="flex flex-col mt-16 mb-4 w-full items-center justify-center">
         <h1 class="font-bold text-gray-700 text-4xl text-center my-4">View Users</h1> 
 
-        <form class="flex items-center mt-4" action="./admin_search.php" method="POST">   
+        <form class="flex items-center mt-4" action="./admin_userSearch.php" method="POST">   
             <label for="search" class="sr-only">Search</label>
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -87,10 +84,10 @@
                                     <span class="px-4 py-2 rounded-lg text-white '.$colorStyle.'"> '.$row["status"].'</span>  
                                 </td>
                                 <td class="px-6 py-4">
-                                    <form action="./scripts/admin_script.php" method="POST"> 
-                                        <button name="editUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+                                    <form class="m-0 p-0" action="./scripts/admin_script.php" method="POST">
+                                        <a href="./admin_editUser.php?id='.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
                                             <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
-                                        </button>
+                                        </a>  
                                         <button name="deleteUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500  text-white hover:bg-red-600">
                                             <i class="fa fa-trash text-white px-2" aria-hidden="true"></i>Delete
                                         </button>

@@ -4,19 +4,22 @@
     $productName = "";
     $productCategory = "";
     $productDesc = "";
-    $productSalePrice = "";
+    $productSalePrice = 0.0;
     $imgPath = "";
     $vendorId = "";
     $firstname = "";
     $lastname = "";
     $inStock = true;
 
-    if(isset($_GET['id'])){
-        include './scripts/dbConnection.php';
+    
+    if(!isset($_GET['id'])) header("Location: index.php");
 
+    if(isset($_GET['id'])){
         $prodId = $_GET['id'];
+        include './scripts/dbConnection.php';
+        
         $sql = "SELECT * FROM products WHERE id = '$prodId'";
-		$result = $conn->query($sql);
+        $result = $conn->query($sql);
         if ($result !== false && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $productName = $row['name'];
@@ -27,6 +30,8 @@
                 $vendorId = $row['vendorId'];
                 $inStock = $row['quantity'] > 0 ? true : false;
             }
+        }else{
+            header("Location: index.php");
         }
 
         $sql = "SELECT * FROM users WHERE id = '$vendorId'";
@@ -37,8 +42,8 @@
                 $lastname = $row['lastname'];
             }
         }
-
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +61,15 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <?php require './components/header.php'; ?>
+    <?php
+        include './scripts/utils.php';
+		if(isGuest()){
+			require './components/header_guest.php';
+		}else{
+			require './components/header.php';
+		}
+		
+	?>
 
     <div class="antialiased">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">

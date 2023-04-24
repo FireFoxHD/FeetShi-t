@@ -1,12 +1,6 @@
 <?php
-
-session_start();
-if (isset($_SESSION['userId'])) {
+	session_start();
 	include './scripts/utils.php';
-	if (setInactive($_SESSION['userId'])) {
-		session_destroy();
-	}
-}
 ?>
 
 
@@ -25,7 +19,14 @@ if (isset($_SESSION['userId'])) {
 </head>
 
 <body class="flex flex-col min-h-screen">
-	<?php require './components/header.php'; ?>
+	<?php
+		if(isGuest()){
+			require './components/header_guest.php';
+		}else{
+			require './components/header.php';
+		}
+		
+	 ?>
 	<?php require './scripts/dbConnection.php'; ?>
 
 	<div class=" flex flex-col my-16 container mx-auto">

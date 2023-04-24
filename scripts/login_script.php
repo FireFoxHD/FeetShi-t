@@ -50,16 +50,19 @@
                 setErrorMsg("errLogin","Invalid Credentials");
             }
 
-            setActive($_SESSION['userId']);
-            
-            if ($_SESSION['accType'] == "admin"){	
-                header("Location: ../admin.php");
-            }else if ($_SESSION['accType'] == "vendor"){
-                header("Location: ../vendor.php");
+            if(!$_SESSION['errLogin']){
+                 setActive($_SESSION['userId']);
+                if ($_SESSION['accType'] == "admin"){	
+                    header("Location: ../admin.php");
+                }else if ($_SESSION['accType'] == "vendor"){
+                    header("Location: ../vendor.php");
+                }else{
+                    header("Location: ../index.php");
+                }
             }else{
-                setErrorMsg("errLogin",$_SESSION['userId']);
                 header("Location: ../login.php");
             }
+           
         }
     }else{
         header("Location: ../login.php");
