@@ -1,5 +1,6 @@
 <?php
 
+    include './scripts/utils.php';
 	session_start();
     
 	if(!isset(
@@ -80,10 +81,17 @@
 </head>
 
 <body>
-    <?php require './components/header.php'; ?>
+    <?php
+        if(isAdminAuth()){
+            require './components/header_admin.php';
+        }else{
+            require './components/header.php';
+        }
+    ?>
+
     <div class="flex flex-col items-center justify-center">
         <div class="flex flex-col items-center justify-center mt-12">
-            <h1 class="font-bold text-gray-700 text-2xl p-4">Sign Up</h1>
+            <h1 class="font-bold text-gray-700 text-2xl p-4">Create Account</h1>
             <p class="text-gray-500 text-md text-center">Enter your details to create an account you degenerate.</p>
         </div>
 
@@ -91,44 +99,60 @@
             <form class="flex flex-col items-center justify-center my-6 w-full" action="./scripts/registerUser_script.php" method="POST">
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">Username</label><?php echo $_SESSION['errUsername']; ?>
-                    <input name="username" type="text" value="<?php echo $username?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input required name="username" type="text" value="<?php echo $username?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                     
                 </div>
             
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">First name</label><?php echo $_SESSION['errFirstname']; ?>
-                    <input name="firstname" type="text" value="<?php echo $firstname?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input required name="firstname" type="text" value="<?php echo $firstname?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                     
                 </div>
     
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">Last name</label><?php echo $_SESSION['errLastname']; ?>
-                    <input name="lastname" type="text" value="<?php echo $lastname?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input required name="lastname" type="text" value="<?php echo $lastname?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                     
                 </div>
 
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">Phone number</label> <?php echo $_SESSION['errPhone']; ?>
-                    <input name="phone" type="text" placeholder="111-111-1111" value="<?php echo $phone?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input required name="phone" type="text" value="<?php echo $phone?>" placeholder="111-111-1111" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
             
                 </div> 
     
                 <div class="m-2 w-full">
                     <label class=" text-blueGray-600 font-bold mb-2">Email</label><?php echo $_SESSION['errEmail']; ?>
-                    <input name="email" type="text" value="<?php echo $email?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input required name="email" type="text" value="<?php echo $email?>" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                 </div>
     
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">Password</label> <?php echo $_SESSION['errPassword']; ?>
-                    <input name="password_1" type="password" value="<?php echo $password_1?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input required name="password_1" type="password" value="<?php echo $password_1?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                 
                 </div>
 
                 <div class="m-2 w-full">
                     <label class="text-blueGray-600 font-bold mb-2">Confirm Password</label>
-                    <input name="password_2" type="password" value="<?php echo $password_2?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
+                    <input required name="password_2" type="password" value="<?php echo $password_2?>"  class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" autocomplete="off">
                 
                 </div>
+
+                <?php
+                    if(isAdminAuth()){
+                        echo'
+                            <div class="m-2 w-full">
+                                <label class="text-blueGray-600 font-bold mb-2">Account type</label>
+                                <select name="accType" class="bg-white border-2 border-slate-300 text-gray-900 text-sm rounded focus:ring-blue-500 placeholder-blueGray-300 block w-full p-2.5" required>
+                                    <option value="" selected disabled hidden>Select Account Type</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="vendor">Vendor</option>
+                                    <option value="guest">Guest</option>
+                                </select>
+                            </div> 
+                        ';
+                    }
+                ?>
     
     
                 <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-32 rounded my-4" id="saveForm" type="submit" name="submit" value="Sign up" />

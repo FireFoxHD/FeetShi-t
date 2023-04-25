@@ -10,12 +10,17 @@
                             <li>
                                 <a href="admin.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">View Users</a>
                             </li>
+                            
                             <li>
                                 <a href="admin_registerUser.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">Add User</a>
                             </li>
 
                             <li>
                                 <a href="admin_viewProducts.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">View Products</a>
+                            </li>
+
+                            <li>
+                                <a href="viewOrders.php" class="px-2 py-2 font-bold hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600">View Orders</a>
                             </li>
                            
                         </ul>

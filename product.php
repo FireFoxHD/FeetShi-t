@@ -31,7 +31,7 @@
                 $inStock = $row['quantity'] > 0 ? true : false;
             }
         }else{
-            header("Location: index.php");
+            header("Location: 404.php");
         }
 
         $sql = "SELECT * FROM users WHERE id = '$vendorId'";
@@ -42,6 +42,7 @@
                 $lastname = $row['lastname'];
             }
         }
+        if ($conn)$conn->close();
     }
 
 ?>

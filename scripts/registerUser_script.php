@@ -104,7 +104,6 @@
         }else{
         
             if ($password_1 == $password_2){
-           
                 if (preg_match("/^(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[a-zA-Z]).*$/",$password_1)){
                     $_SESSION['password_1'] = $password_1;
                     $_SESSION['password_2'] = $password_2;
@@ -113,32 +112,26 @@
                     createError("password_1", "errPassword", "Your password must be at least 8 characters long and contain at least one number and one special character!");
                     createError("password_2", "errPassword", "Your password must be at least 8 characters long and contain at least one number and one special character!");  
                 }
-                
+
             }else{
                 createError("password_1", "errPassword", "Your passwords do not match!"); 
                 createError("password_2", "errPassword", "Your passwords do not match!");
             }
         }
 
-  
         $accType = isset($_POST["accType"]) && !empty($_POST["accType"]) ? $_POST["accType"] : "guest";
         
-        
         if ($_SESSION['errors']){
-            if(!isset($_SESSION['userId'])){
-                header("Location: ../register.php");
-                exit();
-            }else{
-                header("Location: ../admin_registerUser.php");
-                exit();
-            }    
+            header("Location: ../register.php");
+            exit(); 
         }else{
             include 'dbConnection.php';
+            
             //hash the password
             $hashed_pwd = hash('sha256', $password_1);
             $id = uniqid();
             $insert_query = "INSERT INTO users (id, username, firstname, lastname, email, hashed_pwd, phone, accType, status)
-                VALUES ( '$id', '$username', '$firstname','$lastname','$email','$hashed_pwd','$phone', '$accType', 'inactive')";
+                VALUES ('$id', '$username', '$firstname','$lastname','$email','$hashed_pwd','$phone', '$accType', 'inactive')";
            
             $result = $conn->query($insert_query);
             

@@ -108,31 +108,12 @@
                 if ($conn)$conn->close();
                 exit();
             }else{
-
-                $email = "";
-                $subject = "Your Order From Feetsh*t - #".$orderid;
-                $header = "From:store@feetsh*t.com \r\n";
-                $header .= "CC: khamalipowell@gmail.com \r\n";
-                $header .= "MIME-Version: 1.0\r\n";
-                $header .= "Content-type: text/html\r\n";
-                $message = "
-                    <p> Order will be available for pickup in 5-10day pleave visit us at 5 Fairmont Dr, Kingston, Jamaica. </p><br/> 
-                    <p> Please remebr to walk with valid ID and your used to make this order for verification. </p>
-                ";
-
-                //create new page to display order results
-
-                // if(mail($email,$subject,$message,$header) === true ) {
-                //    echo "Message sent successfully...";
-                // }else {
-                //    echo "Message could not be sent...";
-                // }
-                // echo "Order Success";
+                header("Location: ../orderSuccess.php?id=".$orderid); 
             }
             //close connection
             if ($conn)$conn->close();
             unset($_SESSION['cartProducts']);
-            header("Location: ../guest.php");
+            header("Location: ../index.php");
         }
 
 
