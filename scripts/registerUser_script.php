@@ -8,11 +8,15 @@
     if (isset($_POST["submit"])){
 
         $username = trim($_POST["username"]);
+        $username = filter_var($_POST["username"], FILTER_SANITIZE_STRING);
+
+
         
         // validate first name
         if (empty($username)){					
             createError("username", "errUsername", "Your First Name is required!"); 
         }else{
+            
             if (preg_match("/^[a-zA-Z]*$/",$username)){
                 //check if exists in db
                 include 'dbConnection.php';
@@ -34,6 +38,9 @@
         
         $firstname = trim($_POST["firstname"]);
         $lastname = trim($_POST["lastname"]);
+        $firstname = filter_var($_POST["firstname"], FILTER_SANITIZE_STRING);
+        $lastname= filter_var($_POST["lastname"], FILTER_SANITIZE_STRING);
+
         
         // validate first name
         if (empty($firstname)){					
@@ -60,6 +67,7 @@
         }
 
         $email = trim($_POST["email"]);
+        
         if (empty($email)) {
             createError("email", "errEmail", "Your email address is required!"); 
         }else{
@@ -84,6 +92,9 @@
         }
 
         $phone = trim($_POST["phone"]);
+        $phone = filter_var($_POST["phone"], FILTER_SANITIZE_STRING);
+
+        
         if (empty($phone)) {
             createError("phone", "errPhone", "Your phone number is required!"); 
         }else{
@@ -97,6 +108,9 @@
 
         $password_1 = trim($_POST["password_1"]);
         $password_2 = trim($_POST["password_2"]);
+        $password_1= filter_var($_POST["password_1"], FILTER_SANITIZE_STRING);
+        $password_2= filter_var($_POST["password_2"], FILTER_SANITIZE_STRING);
+
         $password_length = strlen($password_1);
         if (empty ($password_1) || empty ($password_2)){
             empty ($password_1) ? createError("password_1", "errPassword", "Your passwords are required!") : "" ;
