@@ -122,7 +122,7 @@
             $sql = "UPDATE users SET username='$username', firstname='$firstname', lastname='$lastname', email='$email', phone='$phone', hashed_pwd='$hashed_pwd', accType='$accType' WHERE id = '$userId'";
         }else{
                 //update /w pass
-                $sql = "UPDATE users SET username='$username', firstname='$firstname', lastname='$lastname', email='$email', phone='$phone', accType='$accType' WHERE id = '$userId'";
+            $sql = "UPDATE users SET username='$username', firstname='$firstname', lastname='$lastname', email='$email', phone='$phone', accType='$accType' WHERE id = '$userId'";
         } 
 
         if(!$_SESSION['errors']){

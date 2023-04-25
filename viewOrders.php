@@ -31,6 +31,7 @@
         }else{
             require './components/header.php';
         } 
+
     ?>
 
     <div class="flex flex-col my-16 w-full items-center justify-center">
@@ -65,8 +66,7 @@
             <tbody>
                 <?php
                     include './scripts/dbConnection.php';
-                    //CUREENTLY IT VIEWS ALL ORDERS MADE
-                    // $vendorId = $_SESSION['userId'];
+                    
                     $sql = "SELECT * FROM orders";
                     $result = $conn->query($sql);
                     if ($result!== false && $result->num_rows > 0) {

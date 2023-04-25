@@ -152,4 +152,61 @@
     
     }
 
+    if (isset($_POST["updateProductBtn"])){
+        $productId = $_POST['productId'];
+        
+        $productName = trim($_POST["productName"]);
+        $_SESSION['productName'] = $productName;
+        $_SESSION['errProductName'] = "";
+        
+        
+        $productDesc = trim($_POST["productDescription"]);
+        if(empty($productDesc)){
+            $_SESSION['productDesc'] = "NO DESCRIPTION";
+        }else{
+            $_SESSION['productDesc'] = "$productDesc";
+        }
+
+
+    
+        $productSalePrice = (is_numeric($_POST['productSalePrice']) ? (float)$_POST['productSalePrice'] : trim($_POST["productSalePrice"]));
+        if(is_numeric($productSalePrice) && $productSalePrice > 0){
+            $_SESSION['productSalePrice'] = $productSalePrice;
+            $_SESSION['errProductSalePrice'] = "";
+        }else{
+            createError($productSalePrice, 'errProductSalePrice', 'Must be a numeric value greater than 0!');
+        }
+        
+        //will allow a user to enter 0 because they may be creating item with the intention of getting it in stock
+        $productStockQuantity = (is_numeric($_POST['productStockQuantity']) ? (int)$_POST['productStockQuantity'] : trim($_POST["productStockQuantity"]));
+        if(is_int($productStockQuantity)){
+            $_SESSION['productStockQuantity'] = $productStockQuantity;
+            $_SESSION['errProductStockQuantity'] = "";
+        }else{ 
+            createError($productStockQuantity, 'errProductStockQuantity', 'Must be an integer');
+        }
+        
+       
+
+        //redirect to cost page if no errors
+        if ($_SESSION['errors']){
+            header("Location: ../editProduct.php?id=".$productId);
+            exit();
+        }else{
+            include 'dbConnection.php';
+            $sql = "UPDATE products SET name='$productName', description='$productDesc', salePrice='$productSalePrice', quantity='$productStockQuantity' WHERE id = '$productId'";
+            if ($conn->query($sql) === TRUE) {
+                
+                if(isVendorAuth())header("Location: ../vendor.php");
+                if(isAdminAuth())header("Location: ../admin_viewProducts.php");
+                exit();
+            }else{
+                //error updating
+                header("Location: ../editProduct.php?id=".$productId);
+                exit();
+            }
+            
+        }
+       
+    }
 ?>

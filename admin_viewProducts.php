@@ -73,9 +73,9 @@
                                 <td class="px-6 py-4">'.'$ '.number_format($row["salePrice"],2).'</td>
                                 <td class="px-6 py-4">
                                     <form action="./scripts/vendor_script.php" method="POST"> 
-                                        <button name="editUserBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+                                        <a href="./editProduct.php?id='.$row["id"].'" class="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
                                             <i class="fa fa-pencil text-white px-2" aria-hidden="true"></i>Edit
-                                        </button>
+                                        </a>  
                                         <button name="deleteProductBtn" value="'.$row["id"].'" class="px-4 py-2 rounded-lg bg-red-500  text-white hover:bg-red-600">
                                             <i class="fa fa-trash text-white px-2" aria-hidden="true"></i>Delete
                                         </button>

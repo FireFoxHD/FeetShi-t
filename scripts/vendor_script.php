@@ -5,13 +5,7 @@
    
     
     $_SESSION['errors'] = false;	// Set to no errors
-
-    //TODO: this
-    if (isset($_POST["editProductBtn"])){
-        $prodId = $_POST['editProductBtn'];
-        header("Location: ../vendor_editProduct.php?id='$prodId'");
-    }
-
+    
     if (isset($_POST["deleteProductBtn"])){
         include 'dbConnection.php';
 
@@ -38,10 +32,3 @@
 
         
     } 
-
-        
-    
-    
-    if (isset($_POST["editUserSubmit"])){
-        //from edit user page
-    }

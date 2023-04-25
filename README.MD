@@ -13,11 +13,7 @@ password: 12345678A!
 ``````
 
 ### TODO:
-- view orders
-- view order details page
-- view order search
 - Allow edit and delete of products (by vendor and by admin)
-- vendor edit order to look like admin edit user
 - display errors from admin Edit user
 - display errors from register.php
 - lowercase username before adding and searching db
