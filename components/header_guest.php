@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="flex items-center space-x-4">        
-                        <a href="/cart.php" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
+                        <a href="cart.php" class="flex text-white text-md h-10 items-center px-5 rounded-lg bg-indigo-600 focus:outline-none hover:bg-indigo-500">
                             View Cart
                         </a>
                         <form class="m-0 p-0" action="./scripts/logout_script.php" method="POST">
