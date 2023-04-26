@@ -25,6 +25,10 @@
         <p class="font-bold text-gray-500">Phone: 1(876)771-3957</p>
         <p class="font-bold text-gray-500">Email: khamalipowell@gmail.com</p>
         <p class="font-bold text-gray-500">Address: 5 Fairmont Dr, Kingston, Jamaica</p>
+		<br>
+		<p class="font-bold text-gray-500">Phone: 1(876)530-3441</p>
+        <p class="font-bold text-gray-500">Email: ishmaeldarby@gmail.com</p>
+        <p class="font-bold text-gray-500">Address: 27 Hagley Park Rd, Kingston, Jamaica</p>
 	</div>
     
 	<?php require './components/footer.php'; ?>

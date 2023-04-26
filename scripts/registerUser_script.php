@@ -17,6 +17,7 @@
             createError("username", "errUsername", "Your First Name is required!"); 
         }else{
             
+            strtolower($username);
             if (preg_match("/^[a-zA-Z]*$/",$username)){
                 //check if exists in db
                 include 'dbConnection.php';

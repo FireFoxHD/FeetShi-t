@@ -50,7 +50,7 @@
                 <div class="flex justify-around">
                     <div class="m-2 w-full">
                         <label class="text-blueGray-600 font-bold mb-2">Upload image</label> <?php echo $_SESSION['errProductImg']; ?>
-                        <input name="productImg" type="file" class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150">
+                        <input name="productImg" type="file" id ="file" multiple class="box-border border-solid border-2 border-slate-300 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:border-none focus:ring w-full ease-linear transition-all duration-150">
                     
                     </div>
                     <div class="flex flex-col my-2 items-start">
